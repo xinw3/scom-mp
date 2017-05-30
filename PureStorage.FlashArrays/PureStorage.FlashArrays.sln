@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D4B43EB3-688B-4EEE-86BD-088F0B28ABB3}") = "PureStorage.FlashArrays.Discovery", "PureStorage.FlashArrays\PureStorage.FlashArrays.Discovery.mpproj", "{65DF922D-559B-4089-9AD6-144B5C395155}"
+EndProject
+Project("{D4B43EB3-688B-4EEE-86BD-088F0B28ABB3}") = "PureStorage.FlashArrays.Dashboards", "PureStorage.FlashArrays.Dashboards\PureStorage.FlashArrays.Dashboards.mpproj", "{E26FE9D1-3947-4F94-B88D-2699445890AA}"
+EndProject
+Project("{D4B43EB3-688B-4EEE-86BD-088F0B28ABB3}") = "PureStorage.FlashArrays.Monitoring", "PureStorage.FlashArrays.Monitoring\PureStorage.FlashArrays.Monitoring.mpproj", "{839A2A49-037B-41E6-856E-ECEDC642A562}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65DF922D-559B-4089-9AD6-144B5C395155}.Debug|x86.ActiveCfg = Debug|x86
+		{65DF922D-559B-4089-9AD6-144B5C395155}.Debug|x86.Build.0 = Debug|x86
+		{65DF922D-559B-4089-9AD6-144B5C395155}.Release|x86.ActiveCfg = Release|x86
+		{65DF922D-559B-4089-9AD6-144B5C395155}.Release|x86.Build.0 = Release|x86
+		{E26FE9D1-3947-4F94-B88D-2699445890AA}.Debug|x86.ActiveCfg = Debug|x86
+		{E26FE9D1-3947-4F94-B88D-2699445890AA}.Debug|x86.Build.0 = Debug|x86
+		{E26FE9D1-3947-4F94-B88D-2699445890AA}.Release|x86.ActiveCfg = Release|x86
+		{E26FE9D1-3947-4F94-B88D-2699445890AA}.Release|x86.Build.0 = Release|x86
+		{839A2A49-037B-41E6-856E-ECEDC642A562}.Debug|x86.ActiveCfg = Debug|x86
+		{839A2A49-037B-41E6-856E-ECEDC642A562}.Debug|x86.Build.0 = Debug|x86
+		{839A2A49-037B-41E6-856E-ECEDC642A562}.Release|x86.ActiveCfg = Release|x86
+		{839A2A49-037B-41E6-856E-ECEDC642A562}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

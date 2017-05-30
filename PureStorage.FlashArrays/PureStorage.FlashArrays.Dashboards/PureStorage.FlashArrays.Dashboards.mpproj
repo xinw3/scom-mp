@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{e22f9d9f-bac1-4930-a61d-a9cbb35a7279}</ProjectGuid>
-    <RootNamespace>PureStorage.FlashArray.Monitoring</RootNamespace>
-    <Name>PureStorage.FlashArrayMP.Monitoring</Name>
-    <ManagementPackName>PureStorage.FlashArray.Monitoring</ManagementPackName>
+    <ProjectGuid>{e26fe9d1-3947-4f94-b88d-2699445890aa}</ProjectGuid>
+    <RootNamespace>PureStorage.FlashArrays.Dashboards</RootNamespace>
+    <Name>PureStorage.FlashArrays.Dashboards</Name>
+    <ManagementPackName>PureStorage.FlashArrays.Dashboards</ManagementPackName>
     <Version>1.0.0.0</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
     <MpFrameworkProfile>OM</MpFrameworkProfile>
@@ -14,11 +14,11 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <GenerateSealed>false</GenerateSealed>
-    <Company>MyCompany</Company>
-    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
-    <DelaySigning>false</DelaySigning>
-    <AssemblyOriginatorKeyFile />
+    <GenerateSealed>True</GenerateSealed>
+    <Company>Pure Storage</Company>
+    <Copyright>Copyright (c) Pure Storage. All rights reserved.</Copyright>
+    <DelaySigning>False</DelaySigning>
+    <AssemblyOriginatorKeyFile>C:\Users\Administrator\Desktop\VSAE_Projects\mp_xin.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
@@ -52,14 +52,23 @@
     </ManagementPackReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes and Discoveries" />
-    <Folder Include="Monitors and Rules" />
-    <Folder Include="Presentation" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Classes and Discoveries\FlashArrayMP Class.mpx">
+    <Compile Include="Project.mpx">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PureStorage.FlashArrays.Monitoring\PureStorage.FlashArrays.Monitoring.mpproj">
+      <Name>PureStorage.FlashArrays.Monitoring</Name>
+      <Project>{839a2a49-037b-41e6-856e-ecedc642a562}</Project>
+      <Private>True</Private>
+      <Alias>FAsMonitoring</Alias>
+    </ProjectReference>
+    <ProjectReference Include="..\PureStorage.FlashArrays\PureStorage.FlashArrays.Discovery.mpproj">
+      <Name>PureStorage.FlashArrays.Discovery</Name>
+      <Project>{65df922d-559b-4089-9ad6-144b5c395155}</Project>
+      <Private>True</Private>
+      <Alias>FAsDiscovery</Alias>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>
