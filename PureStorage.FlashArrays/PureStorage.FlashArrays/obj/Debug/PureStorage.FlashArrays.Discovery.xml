@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays.Discovery</ID>
-      <Version>1.0.0.7</Version>
+      <Version>1.0.0.12</Version>
     </Identity>
     <Name>PureStorage.FlashArrays.Discovery</Name>
     <References>
@@ -17,8 +17,8 @@
   <LanguagePacks>
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery">
-          <Name>Pure Storage FlashArrays Discovery</Name>
+        <DisplayString ElementID="PureStorage.FlashArrays">
+          <Name>Pure Storage FlashArrays</Name>
         </DisplayString>
       </DisplayStrings>
       <KnowledgeArticles></KnowledgeArticles>

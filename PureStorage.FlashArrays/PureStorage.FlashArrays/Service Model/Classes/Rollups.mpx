@@ -1,0 +1,43 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="PureStorage.FlashArrays.Application" Base="System!System.Service" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true"  />
+        <ClassType ID="PureStorage.FlashArrays.Central" Base="System!System.Group" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true"  />
+        <ClassType ID="PureStorage.FlashArrays.Arrays" Base="System!System.Group" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true"  />
+        <ClassType ID="PureStorage.FlashArrays.Array" Base="System!System.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="false" Singleton="false" >
+          <Property ID="ArrayCode" Key="true" Type="string"/>
+        </ClassType>
+
+
+      </ClassTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+  
+        <DisplayString ElementID="PureStorage.FlashArrays.Application">
+          <Name>PureStorage FlashArrays Application</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="PureStorage.FlashArrays.Central">
+          <Name>PureStorage FlashArrays Central</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="PureStorage.FlashArrays.Arrays">
+          <Name>PureStorage FlashArrays Arrays</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="PureStorage.FlashArrays.Array" SubElementID="ArrayCode">
+          <Name>Array Code</Name>
+          <Description></Description>
+        </DisplayString>
+       
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

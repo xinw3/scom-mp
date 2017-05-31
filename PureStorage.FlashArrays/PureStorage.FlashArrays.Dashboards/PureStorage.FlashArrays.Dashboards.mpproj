@@ -56,19 +56,5 @@
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PureStorage.FlashArrays.Monitoring\PureStorage.FlashArrays.Monitoring.mpproj">
-      <Name>PureStorage.FlashArrays.Monitoring</Name>
-      <Project>{839a2a49-037b-41e6-856e-ecedc642a562}</Project>
-      <Private>True</Private>
-      <Alias>FAsMonitoring</Alias>
-    </ProjectReference>
-    <ProjectReference Include="..\PureStorage.FlashArrays\PureStorage.FlashArrays.Discovery.mpproj">
-      <Name>PureStorage.FlashArrays.Discovery</Name>
-      <Project>{65df922d-559b-4089-9ad6-144b5c395155}</Project>
-      <Private>True</Private>
-      <Alias>FAsDiscovery</Alias>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>

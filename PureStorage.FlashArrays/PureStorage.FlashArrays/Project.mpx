@@ -2,8 +2,8 @@
   <LanguagePacks>
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery">
-          <Name>Pure Storage FlashArrays Discovery</Name>
+        <DisplayString ElementID="PureStorage.FlashArrays">
+          <Name>Pure Storage FlashArrays</Name>
         </DisplayString>
       </DisplayStrings>
     </LanguagePack>

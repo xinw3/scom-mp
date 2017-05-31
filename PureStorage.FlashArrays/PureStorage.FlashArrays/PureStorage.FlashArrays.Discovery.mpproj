@@ -61,5 +61,13 @@
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PureStorage.FlashArrays\PureStorage.FlashArrays.mpproj">
+      <Name>PureStorage.FlashArrays</Name>
+      <Project>{b8647f8f-8c16-487a-952b-9f0d3691a627}</Project>
+      <Private>True</Private>
+      <Alias>FlashArrays</Alias>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>
