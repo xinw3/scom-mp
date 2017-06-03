@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{b8647f8f-8c16-487a-952b-9f0d3691a627}</ProjectGuid>
     <RootNamespace>PureStorage.FlashArrays</RootNamespace>
-    <Name>PureStorage.FlashArrays</Name>
+    <Name>PureStorage FlashArrays</Name>
     <ManagementPackName>PureStorage.FlashArrays</ManagementPackName>
     <Version>1.0.0.0</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
