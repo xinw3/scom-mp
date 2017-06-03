@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{b8647f8f-8c16-487a-952b-9f0d3691a627}</ProjectGuid>
     <RootNamespace>PureStorage.FlashArrays</RootNamespace>
-    <Name>PureStorage FlashArrays</Name>
+    <Name>PureStorage.FlashArrays</Name>
     <ManagementPackName>PureStorage.FlashArrays</ManagementPackName>
     <Version>1.0.0.0</Version>
     <MpFrameworkVersion>v7.0.2</MpFrameworkVersion>
@@ -15,10 +15,10 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
     <GenerateSealed>True</GenerateSealed>
-    <Company>MyCompany</Company>
-    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
+    <Company>Pure Storage</Company>
+    <Copyright>Copyright (c) Pure Storage. All rights reserved.</Copyright>
     <DelaySigning>False</DelaySigning>
-    <AssemblyOriginatorKeyFile>C:\Users\Administrator\Desktop\VSAE_Projects\mp_xin.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>C:\Users\administrator.XIN\Desktop\scom_mp-master\mp_xin.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
@@ -38,7 +38,7 @@
     </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.SystemCenter.Library">
       <Alias>SC</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.Windows.InternetInformationServices.2012">
       <HintPath>C:\Program Files (x86)\System Center Management Packs\SC Management Pack for IIS 2012\Microsoft.Windows.InternetInformationServices.2012.mp</HintPath>
@@ -48,22 +48,29 @@
     </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.Windows.Library">
       <Alias>Windows</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="System.Health.Library">
       <Alias>Health</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="System.Library">
       <Alias>System</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.SystemCenter.Visualization.Library">
       <Alias>Visualization</Alias>
-      <PackageToBundle>false</PackageToBundle>
+      <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presentation\Folders.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Views.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Presentation\Views.mptg</DependentUpon>
+    </Compile>
     <Compile Include="Project.mpx">
       <SubType>Code</SubType>
     </Compile>
@@ -85,10 +92,30 @@
     <Compile Include="Service Model\Classes\Rollups.mpx">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service Model\Discoveries\Discoveries.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Service Model\Discoveries\Discoveries.mptg</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Presentation" />
     <Folder Include="Service Model" />
     <Folder Include="Service Model\Classes" />
+    <Folder Include="Service Model\Discoveries" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Presentation\Views.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Service Model\Discoveries\Discoveries.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Service Model\Discoveries\Demo.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverArrays.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>

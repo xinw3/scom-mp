@@ -1,0 +1,83 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instanceaac2f41d1cd940b795894c063f089c83" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>PureStorage.FlashArrays.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <ViewConfiguration>&lt;Presentation&gt;&lt;ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Desending"&gt;&lt;Name&gt;State&lt;/Name&gt;&lt;Id&gt;PureStorage.FlashArrays.ComputerRole.CentralReceiver&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="1" SortIndex="-1" Width="25" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;In Maintenance Mode&lt;/Name&gt;&lt;Id&gt;InMaintenanceMode&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="2" SortIndex="-1" Width="200" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;Name&lt;/Name&gt;&lt;Id&gt;Name&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;Name&lt;/Name&gt;&lt;Id&gt;Name&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;Path&lt;/Name&gt;&lt;Id&gt;Path&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;/Presentation&gt;</ViewConfiguration>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.CentralReceiver</Id>
+        <DisplayName>Central Receiver</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>PureStorage.FlashArrays.ComputerRole.CentralReceiver</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instance2215212c3b904064998010e9670e8d8e" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ViewFolder>PureStorage.FlashArrays.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.ArrayClient</Id>
+        <DisplayName>Array Clients</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>PureStorage.FlashArrays.ComputerRole.ArrayClient</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instanced83ca2be0f0b49a0ae8d18f33215f8b7" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ViewFolder>PureStorage.FlashArrays.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.Queue</Id>
+        <DisplayName>Queues</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>PureStorage.FlashArrays.Queue</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instancec315895e8e314b8a9a26e91fcde37c7c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ViewFolder>PureStorage.FlashArrays.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.Seed</Id>
+        <DisplayName>Seed</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>PureStorage.FlashArrays.Seed</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instanceab5522a6b42c4725ac7fb6c816de599b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ViewFolder>PureStorage.FlashArrays.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.CentralProcessor</Id>
+        <DisplayName>Central Processor</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>PureStorage.FlashArrays.ComputerRole.CentralProcessor</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instancefb786db817eb43cd99613daba172568c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ViewFolder>PureStorage.FlashArrays.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.ArrayServer</Id>
+        <DisplayName>Array Servers</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>PureStorage.FlashArrays.ComputerRole.ArrayServer</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

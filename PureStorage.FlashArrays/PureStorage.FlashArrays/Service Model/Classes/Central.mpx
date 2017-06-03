@@ -3,7 +3,9 @@
     <EntityTypes>
       <ClassTypes>
         <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralServer" Base="PureStorage.FlashArrays.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false" />
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralReceiver" Base="PureStorage.FlashArrays.ComputerRole.CentralServer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" />
+        <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralReceiver" Base="PureStorage.FlashArrays.ComputerRole.CentralServer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" >
+          <Property ID="InstallPath" Key="false" Type="string" />
+        </ClassType>
         <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralProcessor" Base="PureStorage.FlashArrays.ComputerRole.CentralServer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" >
           <Property ID="QueuePath" Key="false" Type="string" />
           <Property ID="DatabaseServer" Key="false" Type="string" />

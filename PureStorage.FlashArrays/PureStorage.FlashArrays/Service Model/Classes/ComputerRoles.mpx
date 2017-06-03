@@ -2,9 +2,16 @@
   <TypeDefinitions>
     <EntityTypes>
       <ClassTypes>
+        <ClassType ID="PureStorage.FlashArrays.Seed" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" />
         <ClassType ID="PureStorage.FlashArrays.ComputerRole" Base="Windows!Microsoft.Windows.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false" />
       
       </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="PureStorage.FlashArrays.ComputerHostsSeed" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+          <Source ID="Source" Type="Windows!Microsoft.Windows.Computer"/>
+          <Target ID="Target" Type="PureStorage.FlashArrays.Seed" />
+        </RelationshipType>
+      </RelationshipTypes>
     </EntityTypes>
   </TypeDefinitions>
   <LanguagePacks>
@@ -12,6 +19,16 @@
       <DisplayStrings>
         <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole">
           <Name>Pure Storage FlashArrays Computer Role</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="PureStorage.FlashArrays.Seed">
+          <Name>Pure Storage FlashArrays Seed</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="PureStorage.FlashArrays.ComputerHostsSeed">
+          <Name>Pure Storage FlashArrays Computer Hosts Seed</Name>
           <Description></Description>
         </DisplayString>
       </DisplayStrings>

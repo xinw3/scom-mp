@@ -18,7 +18,7 @@
     <Company>Pure Storage</Company>
     <Copyright>Copyright (c) Pure Storage. All rights reserved.</Copyright>
     <DelaySigning>False</DelaySigning>
-    <AssemblyOriginatorKeyFile>C:\Users\Administrator\Desktop\VSAE_Projects\mp_xin.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>C:\Users\administrator.XIN\Desktop\scom_mp-master\mp_xin.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>

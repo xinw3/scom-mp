@@ -25,7 +25,11 @@
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
 
-       
+        <DisplayString ElementID="PureStorage.FlashArrays.WebSites">
+          <Name>PureStorage FlashArrays WebSites</Name>
+          <Description></Description>
+        </DisplayString>
+   
         <DisplayString ElementID="PureStorage.FlashArrays.CentralContainsWebSites">
           <Name>PureStorage FlashArrays Central Contains WebSites</Name>
           <Description></Description>

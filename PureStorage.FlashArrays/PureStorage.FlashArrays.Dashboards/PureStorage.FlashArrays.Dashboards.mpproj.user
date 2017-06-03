@@ -2,14 +2,14 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <DeploymentAutoIncrementVersion>True</DeploymentAutoIncrementVersion>
-    <DeploymentNextVersion>1.0.0.18</DeploymentNextVersion>
+    <DeploymentNextVersion>1.0.0.22</DeploymentNextVersion>
     <DeploymentStartAction>DeployOnly</DeploymentStartAction>
     <DeploymentWebConsoleUrl />
     <DeploymentCommand />
     <DeploymentCommandArguments />
     <DeploymentDependencyMode>ProjectOnly</DeploymentDependencyMode>
-    <DeploymentServerName>SCOM</DeploymentServerName>
+    <DeploymentServerName>scom-xin</DeploymentServerName>
     <DeploymentCredentials>UseCurrentCredentials</DeploymentCredentials>
-    <DeploymentCookie />
+    <DeploymentCookie>5248006170667597904</DeploymentCookie>
   </PropertyGroup>
 </Project>
