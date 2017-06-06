@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.64</Version>
+      <Version>1.0.0.132</Version>
     </Identity>
     <Name>PureStorage.FlashArrays</Name>
     <References>
@@ -17,14 +17,14 @@
         <Version>7.0.8433.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
-      <Reference Alias="IIS2012">
-        <ID>Microsoft.Windows.InternetInformationServices.2012</ID>
-        <Version>7.0.10247.0</Version>
-        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
-      </Reference>
       <Reference Alias="Windows">
         <ID>Microsoft.Windows.Library</ID>
         <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8433.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
       <Reference Alias="System">
@@ -37,350 +37,157 @@
   <TypeDefinitions>
     <EntityTypes>
       <ClassTypes>
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.ArrayComputer" Base="PureStorage.FlashArrays.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false">
-          <Property ID="ArrayCode" Key="false" Type="string" />
+        <ClassType ID="Pure.FlashArrays.ComputerRole.ArraysBase" Base="Windows!Microsoft.Windows.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false">
+          <Property ID="Version" Key="false" Type="string" />
         </ClassType>
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.ArrayServer" Base="PureStorage.FlashArrays.ComputerRole.ArrayComputer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" />
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.ArrayClient" Base="PureStorage.FlashArrays.ComputerRole.ArrayComputer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" />
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralServer" Base="PureStorage.FlashArrays.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false" />
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralReceiver" Base="PureStorage.FlashArrays.ComputerRole.CentralServer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
-          <Property ID="InstallPath" Key="false" Type="string" />
+        <ClassType ID="Pure.FlashArrays.Arrays" Base="Pure.FlashArrays.ComputerRole.ArraysBase" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+          <Property ID="Controllers" Key="false" Type="string" />
+          <Property ID="Hosts" Key="false" Type="string" />
+          <Property ID="Volumes" Key="false" Type="string" />
         </ClassType>
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole.CentralProcessor" Base="PureStorage.FlashArrays.ComputerRole.CentralServer" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
-          <Property ID="QueuePath" Key="false" Type="string" />
-          <Property ID="DatabaseServer" Key="false" Type="string" />
-          <Property ID="DatabaseName" Key="false" Type="string" />
+        <ClassType ID="Pure.FlashArrays.ArraysComponents" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+          <Property ID="Controllers" Key="false" Type="string" />
+          <Property ID="Hosts" Key="false" Type="string" />
+          <Property ID="Volumes" Key="false" Type="string" />
         </ClassType>
-        <ClassType ID="PureStorage.FlashArrays.Queue" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
-          <Property ID="ArrayCode" Key="true" Type="string" />
-          <Property ID="FolderPath" Key="false" Type="string" />
-        </ClassType>
-        <ClassType ID="PureStorage.FlashArrays.Seed" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" />
-        <ClassType ID="PureStorage.FlashArrays.ComputerRole" Base="Windows!Microsoft.Windows.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false" />
-        <ClassType ID="PureStorage.FlashArrays.WebSites" Base="InstanceGroup!Microsoft.SystemCenter.InstanceGroup" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true" />
-        <ClassType ID="PureStorage.FlashArrays.Application" Base="System!System.Service" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true" />
-        <ClassType ID="PureStorage.FlashArrays.Central" Base="System!System.Group" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true" />
-        <ClassType ID="PureStorage.FlashArrays.Arrays" Base="System!System.Group" Accessibility="Public" Abstract="false" Hosted="false" Singleton="true" />
-        <ClassType ID="PureStorage.FlashArrays.Array" Base="System!System.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="false" Singleton="false">
-          <Property ID="ArrayCode" Key="true" Type="string" />
-        </ClassType>
+        <ClassType ID="Pure.FlashArrays.InstanceGroups" Accessibility="Public" Base="InstanceGroup!Microsoft.SystemCenter.InstanceGroup" Abstract="false" Hosted="false" Singleton="true" />
+        <ClassType ID="Pure.FlashArrays.ComputerGroups" Accessibility="Public" Base="SC!Microsoft.SystemCenter.ComputerGroup" Abstract="false" Hosted="false" Singleton="true" />
+        <ClassType ID="Pure.FlashArrays.HealthRollup" Accessibility="Public" Base="System!System.ComputerRole" Abstract="false" Hosted="false" Singleton="true" />
       </ClassTypes>
       <RelationshipTypes>
-        <RelationshipType ID="PureStorage.FlashArrays.CentralProcessorHostsQueue" Base="System!System.Hosting" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.ComputerRole.CentralProcessor" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.Queue" />
+        <RelationshipType ID="Pure.FlashArrays.ArraysHostComponents" Base="System!System.Hosting" Accessibility="Public" Abstract="false">
+          <Source ID="Source" Type="Pure.FlashArrays.Arrays" />
+          <Target ID="Target" Type="Pure.FlashArrays.ArraysComponents" />
         </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.ComputerHostsSeed" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
-          <Source ID="Source" Type="Windows!Microsoft.Windows.Computer" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.Seed" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.ApplicationContainsCentral" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Application" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.Central" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.ApplicationContainsArrays" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Application" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.Arrays" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.ArraysContainsArrayServer" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Arrays" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.ComputerRole.ArrayServer" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.ArraysContainsArrayClient" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Application" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.ComputerRole.ArrayClient" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.CentralContainsCentralProcessor" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Central" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.ComputerRole.CentralProcessor" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.CentralContainsCentralReceiver" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Central" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.ComputerRole.CentralReceiver" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.CentralContainsWebSites" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.Central" />
-          <Target ID="Target" Type="PureStorage.FlashArrays.WebSites" />
-        </RelationshipType>
-        <RelationshipType ID="PureStorage.FlashArrays.WebSitesContainsWebSite" Base="System!System.Containment" Abstract="false" Accessibility="Public">
-          <Source ID="Source" Type="PureStorage.FlashArrays.WebSites" />
-          <Target ID="Target" Type="IIS2012!Microsoft.Windows.InternetInformationServices.6.2.WebSite" />
+        <RelationshipType ID="Pure.FlashArrays.HealthRollupContainsArrays" Base="System!System.Containment" Abstract="false" Accessibility="Public">
+          <Source ID="Source" Type="Pure.FlashArrays.HealthRollup" />
+          <Target ID="Target" Type="Pure.FlashArrays.Arrays" />
         </RelationshipType>
       </RelationshipTypes>
     </EntityTypes>
+    <ModuleTypes>
+      <DataSourceModuleType ID="Pure.FlashArrays.DataSource.AccessArrays" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="SyncTime" minOccurs="0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="TimeoutSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+                <ComputerName>scom-xin</ComputerName>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Schedule" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <ProbeActionModuleType ID="Pure.FlashArrays.Probe.AccessArrays" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="ComputerName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>MonitorArrays.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Health Model/MonitorArrays.ps1</ScriptBody>
+                <TimeoutSeconds>120</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Script" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <TriggerOnly>true</TriggerOnly>
+      </ProbeActionModuleType>
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="Pure.FlashArrays.Monitor.AccessArrays" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="Success" NoDetection="false" />
+          <MonitorTypeState ID="Failure" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="TimeoutSeconds" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS.Monitor" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <TimeoutSeconds>100</TimeoutSeconds>
+            </DataSource>
+            <ProbeAction ID="Monitor.PassThru" TypeID="System!System.PassThroughProbe" />
+            <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+              <ComputerName>scom-xin</ComputerName>
+            </ProbeAction>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="Success">
+              <Node ID="Probe">
+                <Node ID="Monitor.PassThru" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Failure">
+              <Node ID="Probe">
+                <Node ID="Monitor.PassThru" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
   </TypeDefinitions>
   <Monitoring>
     <Discoveries>
-      <Discovery ID="PureStorage.FlashArrays.Discovery.ArrayClient" Target="Windows!Microsoft.Windows.Client.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+      <Discovery ID="PureStorage.FlashArrays.Discovery.Controllers.PowerShell" Target="Pure.FlashArrays.Arrays" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
         <Category>Discovery</Category>
         <DiscoveryTypes>
-          <DiscoveryClass TypeID="PureStorage.FlashArrays.ComputerRole.ArrayClient" />
-        </DiscoveryTypes>
-        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider">
-          <ComputerName>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
-          <RegistryAttributeDefinitions>
-            <RegistryAttributeDefinition>
-              <AttributeName>ArrayCodeExists</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\ArrayCode</Path>
-              <PathType>1</PathType>
-              <AttributeType>0</AttributeType>
-            </RegistryAttributeDefinition>
-            <RegistryAttributeDefinition>
-              <AttributeName>ArrayCode</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\ArrayCode</Path>
-              <PathType>1</PathType>
-              <AttributeType>1</AttributeType>
-            </RegistryAttributeDefinition>
-          </RegistryAttributeDefinitions>
-          <Frequency>600</Frequency>
-          <ClassId>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.ArrayClient"]$</ClassId>
-          <InstanceSettings>
-            <Settings>
-              <Setting>
-                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
-                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
-                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.ArrayComputer"]/ArrayCode$</Name>
-                <Value>$Data/Values/ArrayCode$</Value>
-              </Setting>
-            </Settings>
-          </InstanceSettings>
-          <Expression>
-            <SimpleExpression>
-              <ValueExpression>
-                <XPathQuery>Values/ArrayCodeExists</XPathQuery>
-              </ValueExpression>
-              <Operator>Equal</Operator>
-              <ValueExpression>
-                <Value>true</Value>
-              </ValueExpression>
-            </SimpleExpression>
-          </Expression>
-        </DataSource>
-      </Discovery>
-      <Discovery ID="PureStorage.FlashArrays.Discovery.Seed" Target="Windows!Microsoft.Windows.Server.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
-        <Category>Discovery</Category>
-        <DiscoveryTypes>
-          <DiscoveryClass TypeID="PureStorage.FlashArrays.Seed" />
-        </DiscoveryTypes>
-        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider">
-          <ComputerName>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
-          <RegistryAttributeDefinitions>
-            <RegistryAttributeDefinition>
-              <AttributeName>KeyExists</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays</Path>
-              <PathType>0</PathType>
-              <AttributeType>0</AttributeType>
-            </RegistryAttributeDefinition>
-          </RegistryAttributeDefinitions>
-          <Frequency>600</Frequency>
-          <ClassId>$MPElement[Name="PureStorage.FlashArrays.Seed"]$</ClassId>
-          <InstanceSettings>
-            <Settings>
-              <Setting>
-                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
-                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
-                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-            </Settings>
-          </InstanceSettings>
-          <Expression>
-            <SimpleExpression>
-              <ValueExpression>
-                <XPathQuery>Value/KeyExists</XPathQuery>
-              </ValueExpression>
-              <Operator>Equal</Operator>
-              <ValueExpression>
-                <Value>true</Value>
-              </ValueExpression>
-            </SimpleExpression>
-          </Expression>
-        </DataSource>
-      </Discovery>
-      <Discovery ID="PureStorage.FlashArrays.Discovery.CentralReceiver" Target="PureStorage.FlashArrays.Seed" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
-        <Category>Discovery</Category>
-        <DiscoveryTypes>
-          <DiscoveryClass TypeID="PureStorage.FlashArrays.ComputerRole.CentralReceiver" />
-        </DiscoveryTypes>
-        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.WmiProviderWithClassSnapshotDataMapper">
-          <NameSpace>root\cimv2</NameSpace>
-          <Query>select * from win32_service where name='wmiApSrv'</Query>
-          <Frequency>600</Frequency>
-          <ClassId>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.CentralReceiver"]$</ClassId>
-          <InstanceSettings>
-            <Settings>
-              <Setting>
-                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
-                <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
-                <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.CentralReceiver"]/InstallPath$</Name>
-                <Value>$Data/Property[@Name='PathName']$</Value>
-              </Setting>
-            </Settings>
-          </InstanceSettings>
-        </DataSource>
-      </Discovery>
-      <Discovery ID="PureStorage.FlashArrays.Discovery.ArrayServer" Target="PureStorage.FlashArrays.Seed" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
-        <Category>Discovery</Category>
-        <DiscoveryTypes>
-          <DiscoveryClass TypeID="PureStorage.FlashArrays.ComputerRole.ArrayServer" />
-        </DiscoveryTypes>
-        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider">
-          <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
-          <RegistryAttributeDefinitions>
-            <RegistryAttributeDefinition>
-              <AttributeName>ArrayCodeExists</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\ArrayCode</Path>
-              <PathType>1</PathType>
-              <AttributeType>0</AttributeType>
-            </RegistryAttributeDefinition>
-            <RegistryAttributeDefinition>
-              <AttributeName>ArrayCode</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\ArrayCode</Path>
-              <PathType>1</PathType>
-              <AttributeType>1</AttributeType>
-            </RegistryAttributeDefinition>
-          </RegistryAttributeDefinitions>
-          <Frequency>600</Frequency>
-          <ClassId>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.ArrayServer"]$</ClassId>
-          <InstanceSettings>
-            <Settings>
-              <Setting>
-                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
-                <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
-                <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.ArrayComputer"]/ArrayCode$</Name>
-                <Value>$Data/Values/ArrayCode$</Value>
-              </Setting>
-            </Settings>
-          </InstanceSettings>
-          <Expression>
-            <SimpleExpression>
-              <ValueExpression>
-                <XPathQuery>Values/ArrayCodeExists</XPathQuery>
-              </ValueExpression>
-              <Operator>Equal</Operator>
-              <ValueExpression>
-                <Value>true</Value>
-              </ValueExpression>
-            </SimpleExpression>
-          </Expression>
-        </DataSource>
-      </Discovery>
-      <Discovery ID="PureStorage.FlashArrays.Discovery.CentralProcessor" Target="PureStorage.FlashArrays.Seed" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
-        <Category>Discovery</Category>
-        <DiscoveryTypes>
-          <DiscoveryClass TypeID="PureStorage.FlashArrays.ComputerRole.CentralProcessor" />
-        </DiscoveryTypes>
-        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider">
-          <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
-          <RegistryAttributeDefinitions>
-            <RegistryAttributeDefinition>
-              <AttributeName>QueuePathExists</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\QueuePath</Path>
-              <PathType>1</PathType>
-              <AttributeType>0</AttributeType>
-            </RegistryAttributeDefinition>
-            <RegistryAttributeDefinition>
-              <AttributeName>QueuePath</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\QueuePath</Path>
-              <PathType>1</PathType>
-              <AttributeType>1</AttributeType>
-            </RegistryAttributeDefinition>
-            <RegistryAttributeDefinition>
-              <AttributeName>DatabaseName</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\DatabaseName</Path>
-              <PathType>1</PathType>
-              <AttributeType>1</AttributeType>
-            </RegistryAttributeDefinition>
-            <RegistryAttributeDefinition>
-              <AttributeName>DatabaseServer</AttributeName>
-              <Path>SOFTWARE\PureStorage\FlashArrays\DatabaseServer</Path>
-              <PathType>1</PathType>
-              <AttributeType>1</AttributeType>
-            </RegistryAttributeDefinition>
-          </RegistryAttributeDefinitions>
-          <Frequency>600</Frequency>
-          <ClassId>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.CentralProcessor"]$</ClassId>
-          <InstanceSettings>
-            <Settings>
-              <Setting>
-                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
-                <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
-                <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.CentralProcessor"]/QueuePath$</Name>
-                <Value>$Data/Values/QueuePath$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.CentralProcessor"]/DatabaseName$</Name>
-                <Value>$Data/Values/DatabaseName$</Value>
-              </Setting>
-              <Setting>
-                <Name>$MPElement[Name="PureStorage.FlashArrays.ComputerRole.CentralProcessor"]/DatabaseServer$</Name>
-                <Value>$Data/Values/DatabaseServer$</Value>
-              </Setting>
-            </Settings>
-          </InstanceSettings>
-          <Expression>
-            <SimpleExpression>
-              <ValueExpression>
-                <XPathQuery>Values/QueuePathExists</XPathQuery>
-              </ValueExpression>
-              <Operator>Equal</Operator>
-              <ValueExpression>
-                <Value>true</Value>
-              </ValueExpression>
-            </SimpleExpression>
-          </Expression>
-        </DataSource>
-      </Discovery>
-      <Discovery ID="PureStorage.FlashArrays.Discovery.ArrayQueues" Target="PureStorage.FlashArrays.ComputerRole.CentralProcessor" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
-        <Category>Discovery</Category>
-        <DiscoveryTypes>
-          <DiscoveryClass TypeID="PureStorage.FlashArrays.Queue" />
+          <DiscoveryClass TypeID="Pure.FlashArrays.Arrays" />
+          <DiscoveryRelationship TypeID="Windows!Microsoft.Windows.ComputerHostsLocalApplication" />
         </DiscoveryTypes>
         <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
           <IntervalSeconds>600</IntervalSeconds>
           <SyncTime />
           <ScriptName>Demo.ps1</ScriptName>
-          <ScriptBody><![CDATA[param($sourceId, $managedEntityId, $topFolder, $computerName)
+          <ScriptBody><![CDATA[param($sourceId, $managedEntityId, $computerName)
 $api = New-Object -ComObject 'MOM.ScriptAPI'
 $discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
-$subFolders = Get-ChildItem -Path $topFolder | where {$_.psIsContainer -eq $true}
+
 #foreach($subFolder in $subFolders)
 #{
 #    $subFolder.FullName
 #}
 
-foreach ($subFolder in $subFolders)
+for ($i=1; $i -le 2; $i++)
 {
-    $instance = $discoveryData.CreateClassInstance("$MPElement[Name='PureStorage.FlashArrays.Queue']$")
-    # $instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
-    $instance.AddProperty("$MPElement[Name='PureStorage.FlashArrays.Queue']/ArrayCode$", $subFolder.Name)
-    $instance.AddProperty("$MPElement[Name='PureStorage.FlashArrays.Queue']/FolderPath$", $subFolder.FullName)
+    $instance = $discoveryData.CreateClassInstance("$MPElement[Name='Pure.FlashArrays.Arrays']$")
+    $instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+    $instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Controllers$", "Controller " + $i)
+    $instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Hosts$", "Host " + $i)
+    $instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Volumes$", "Volume " + $i)
 
     $discoveryData.AddInstance($instance)
 }
@@ -396,10 +203,6 @@ $discoveryData]]></ScriptBody>
               <Value>$Target/Id$</Value>
             </Parameter>
             <Parameter>
-              <Name>topFolder</Name>
-              <Value>$Target/Property[Type="PureStorage.FlashArrays.ComputerRole.CentralProcessor"]/QueuePath$</Value>
-            </Parameter>
-            <Parameter>
               <Name>computerName</Name>
               <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
             </Parameter>
@@ -408,47 +211,45 @@ $discoveryData]]></ScriptBody>
         </DataSource>
       </Discovery>
     </Discoveries>
+    <Monitors>
+      <UnitMonitor ID="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal" Accessibility="Public" Enabled="true" Target="Pure.FlashArrays.ArraysComponents" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Windows!Microsoft.Windows.CheckNTServiceStateMonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal.AlertMessage">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="Running" MonitorTypeStateID="Running" HealthState="Success" />
+          <OperationalState ID="NotRunning" MonitorTypeStateID="NotRunning" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ComputerName>scom-xin</ComputerName>
+          <ServiceName>Powershell scipt monitoring</ServiceName>
+          <CheckStartupType>false</CheckStartupType>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="PureStorage.FlashArrays.Monitor.PowerShell" Accessibility="Public" Enabled="true" Target="Pure.FlashArrays.Arrays" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Pure.FlashArrays.Monitor.AccessArrays" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>900</IntervalSeconds>
+          <SyncTime>240</SyncTime>
+          <TimeoutSeconds>300</TimeoutSeconds>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
   </Monitoring>
   <Presentation>
     <Views>
-      <View ID="PureStorage.FlashArrays.View.State.CentralReceiver" Accessibility="Internal" Target="PureStorage.FlashArrays.ComputerRole.CentralReceiver" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
-        <Category>Operations</Category>
-        <Presentation>
-          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Desending">
-            <Name>State</Name>
-            <Id>PureStorage.FlashArrays.ComputerRole.CentralReceiver</Id>
-          </ColumnInfo>
-          <ColumnInfo Index="1" SortIndex="-1" Width="25" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
-            <Name>In Maintenance Mode</Name>
-            <Id>InMaintenanceMode</Id>
-          </ColumnInfo>
-          <ColumnInfo Index="2" SortIndex="-1" Width="200" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
-            <Name>Name</Name>
-            <Id>Name</Id>
-          </ColumnInfo>
-          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
-            <Name>Name</Name>
-            <Id>Name</Id>
-          </ColumnInfo>
-          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
-            <Name>Path</Name>
-            <Id>Path</Id>
-          </ColumnInfo>
-        </Presentation>
-      </View>
-      <View ID="PureStorage.FlashArrays.View.State.ArrayClient" Accessibility="Internal" Target="PureStorage.FlashArrays.ComputerRole.ArrayClient" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+      <View ID="PureStorage.FlashArrays.View.State.Arrays" Accessibility="Internal" Target="Pure.FlashArrays.Arrays" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
         <Category>Operations</Category>
       </View>
-      <View ID="PureStorage.FlashArrays.View.State.Queue" Accessibility="Internal" Target="PureStorage.FlashArrays.Queue" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
-        <Category>Operations</Category>
-      </View>
-      <View ID="PureStorage.FlashArrays.View.State.Seed" Accessibility="Internal" Target="PureStorage.FlashArrays.Seed" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
-        <Category>Operations</Category>
-      </View>
-      <View ID="PureStorage.FlashArrays.View.State.CentralProcessor" Accessibility="Internal" Target="PureStorage.FlashArrays.ComputerRole.CentralProcessor" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
-        <Category>Operations</Category>
-      </View>
-      <View ID="PureStorage.FlashArrays.View.State.ArrayServer" Accessibility="Internal" Target="PureStorage.FlashArrays.ComputerRole.ArrayServer" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+      <View ID="PureStorage.FlashArrays.View.Alert.Arrays" Accessibility="Internal" Target="Pure.FlashArrays.Arrays" TypeID="SC!Microsoft.SystemCenter.AlertViewType" Visible="true">
         <Category>Operations</Category>
       </View>
     </Views>
@@ -456,190 +257,102 @@ $discoveryData]]></ScriptBody>
       <Folder ID="PureStorage.FlashArrays.Folder" Accessibility="Public" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
     </Folders>
     <FolderItems>
-      <FolderItem ElementID="PureStorage.FlashArrays.View.State.CentralReceiver" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.CentralReceiver.FolderItem" />
-      <FolderItem ElementID="PureStorage.FlashArrays.View.State.ArrayClient" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.ArrayClient.FolderItem" />
-      <FolderItem ElementID="PureStorage.FlashArrays.View.State.Queue" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.Queue.FolderItem" />
-      <FolderItem ElementID="PureStorage.FlashArrays.View.State.Seed" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.Seed.FolderItem" />
-      <FolderItem ElementID="PureStorage.FlashArrays.View.State.CentralProcessor" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.CentralProcessor.FolderItem" />
-      <FolderItem ElementID="PureStorage.FlashArrays.View.State.ArrayServer" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.ArrayServer.FolderItem" />
+      <FolderItem ElementID="PureStorage.FlashArrays.View.State.Arrays" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.Arrays.FolderItem" />
+      <FolderItem ElementID="PureStorage.FlashArrays.View.Alert.Arrays" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.Alert.Arrays.FolderItem" />
     </FolderItems>
+    <StringResources>
+      <StringResource ID="Pure.FlashArrays.StringResources.AccessArrays" />
+      <StringResource ID="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal.AlertMessage" />
+    </StringResources>
   </Presentation>
   <LanguagePacks>
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
+        <DisplayString ElementID="Pure.FlashArrays.StringResources.AccessArrays">
+          <Name>Volumes</Name>
+          <Description>$Data/Context/Value$</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal">
+          <Name>Arrays Components Normal</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal.AlertMessage">
+          <Name>Controller is not running</Name>
+          <Description>The controller has some problem and is no longer running.</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal" SubElementID="Running">
+          <Name>Running</Name>
+          <Description>Running</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal" SubElementID="NotRunning">
+          <Name>NotRunning</Name>
+          <Description>NotRunning</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.PowerShell">
+          <Name>Monitor for PowerShell Script</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.PowerShell" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.PowerShell" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
         <DisplayString ElementID="PureStorage.FlashArrays.Folder">
           <Name>Pure Storage FlashArrays</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.View.State.CentralReceiver">
-          <Name>Central Receiver</Name>
+        <DisplayString ElementID="PureStorage.FlashArrays.View.State.Arrays">
+          <Name>Arrays</Name>
           <Description>Description for the new view</Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.View.State.ArrayClient">
-          <Name>Array Clients</Name>
-          <Description>Description for the new view</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.View.State.Queue">
-          <Name>Queues</Name>
-          <Description>Description for the new view</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.View.State.Seed">
-          <Name>Seed</Name>
-          <Description>Description for the new view</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.View.State.CentralProcessor">
-          <Name>Central Processor</Name>
-          <Description>Description for the new view</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.View.State.ArrayServer">
-          <Name>Array Servers</Name>
+        <DisplayString ElementID="PureStorage.FlashArrays.View.Alert.Arrays">
+          <Name>Active Alerts</Name>
           <Description>Description for the new view</Description>
         </DisplayString>
         <DisplayString ElementID="PureStorage.FlashArrays">
           <Name>Pure Storage FlashArrays</Name>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.ArrayComputer">
-          <Name>PureStorage FlashArrays Computer</Name>
+        <DisplayString ElementID="Pure.FlashArrays.ComputerRole.ArraysBase">
+          <Name>FlashArrays Computer Role ArrayBase Class</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.ArrayComputer" SubElementID="ArrayCode">
-          <Name>Array Code</Name>
+        <DisplayString ElementID="Pure.FlashArrays.ComputerRole.ArraysBase" SubElementID="Version">
+          <Name>Version</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.ArrayServer">
-          <Name>Array Server</Name>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays">
+          <Name>Pure Storage FlashArrays Arrays</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.ArrayClient">
-          <Name>Array Client</Name>
+        <DisplayString ElementID="Pure.FlashArrays.ArraysComponents">
+          <Name>Pure Storage FlashArrays Components</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.CentralServer">
-          <Name>PureStorage FlashArrays CentralServer</Name>
+        <DisplayString ElementID="Pure.FlashArrays.ArraysHostComponents">
+          <Name>Pure Arrays Host Components</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.CentralReceiver">
-          <Name>PureStorage FlashArrays CentralReceiver</Name>
+        <DisplayString ElementID="Pure.FlashArrays.InstanceGroups">
+          <Name>Pure FlashArrays Instance Groups</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.CentralProcessor">
-          <Name>PureStorage FlashArrays CentralProcessor</Name>
+        <DisplayString ElementID="Pure.FlashArrays.ComputerGroups">
+          <Name>Pure FlashArrays Computer Groups</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.CentralProcessor" SubElementID="QueuePath">
-          <Name>Queue Path</Name>
+        <DisplayString ElementID="Pure.FlashArrays.HealthRollup">
+          <Name>Pure FlashArrays Health Roll up</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.CentralProcessor" SubElementID="DatabaseServer">
-          <Name>Database Server</Name>
+        <DisplayString ElementID="Pure.FlashArrays.HealthRollupContainsArrays">
+          <Name>Pure FlashArrays Health Rollup Contains Arrays</Name>
           <Description></Description>
         </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole.CentralProcessor" SubElementID="DatabaseName">
-          <Name>Database Name</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Queue">
-          <Name>PureStorage FlashArrays Queue</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Queue" SubElementID="ArrayCode">
-          <Name>Array Code</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Queue" SubElementID="FolderPath">
-          <Name>Folder Path</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.CentralProcessorHostsQueue">
-          <Name>PureStorage FlashArrays Central Processor Hosts Queue</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerRole">
-          <Name>Pure Storage FlashArrays Computer Role</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Seed">
-          <Name>Pure Storage FlashArrays Seed</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ComputerHostsSeed">
-          <Name>Pure Storage FlashArrays Computer Hosts Seed</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ApplicationContainsCentral">
-          <Name>PureStorage FlashArrays Application Contains Central</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ApplicationContainsArrays">
-          <Name>PureStorage FlashArrays Application Contains Arrays</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ArraysContainsArrayServer">
-          <Name>PureStorage FlashArrays Arrays Contains Array Server</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.ArraysContainsArrayClient">
-          <Name>PureStorage FlashArrays Arrays Contains Array Client</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.CentralContainsCentralProcessor">
-          <Name>PureStorage FlashArrays Central Contains Central Processor</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.CentralContainsCentralReceiver">
-          <Name>PureStorage FlashArrays Central Contains Central Receiver</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.WebSites">
-          <Name>PureStorage FlashArrays WebSites</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.CentralContainsWebSites">
-          <Name>PureStorage FlashArrays Central Contains WebSites</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.WebSitesContainsWebSite">
-          <Name>PureStorage FlashArrays WebSites Contains WebSite</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Application">
-          <Name>PureStorage FlashArrays Application</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Central">
-          <Name>PureStorage FlashArrays Central</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Arrays">
-          <Name>PureStorage FlashArrays Arrays</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Array" SubElementID="ArrayCode">
-          <Name>Array Code</Name>
-          <Description></Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.ArrayClient">
-          <Name>Discover PureStorage FlashArrays Array Client</Name>
-          <Description>Description for the new discovery.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.Seed">
-          <Name>Discover PureStorage FlashArrays Seed</Name>
-          <Description>Description for the new discovery.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.CentralReceiver">
-          <Name>Discover PureStorage FlashArrays Central Receiver</Name>
-          <Description>Description for the new discovery.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.ArrayServer">
-          <Name>Discover PureStorage FlashArrays Array Server</Name>
-          <Description>Description for the new discovery.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.CentralProcessor">
-          <Name>Discover PureStorage FlashArrays Central Processor</Name>
-          <Description>Description for the new discovery.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.ArrayQueues">
-          <Name>Discovery Array Queues</Name>
+        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.Controllers.PowerShell">
+          <Name>Discovery Controllers (PowerShell)</Name>
           <Description>Description for the new discovery.</Description>
         </DisplayString>
       </DisplayStrings>

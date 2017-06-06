@@ -1,87 +1,43 @@
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayComputer*5*10*ClassType
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayServer*9*10*ClassType
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayClient*10*10*ClassType
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralServer*5*10*ClassType
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralReceiver*6*10*ClassType
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralProcessor*9*10*ClassType
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.Queue*15*10*ClassType
-Service Model\Classes\ComputerRoles.mpx*PureStorage.FlashArrays.Seed*5*10*ClassType
-Service Model\Classes\ComputerRoles.mpx*PureStorage.FlashArrays.ComputerRole*6*10*ClassType
-Service Model\Classes\Dependencies.mpx*PureStorage.FlashArrays.WebSites*5*10*ClassType
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Application*5*10*ClassType
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Central*6*10*ClassType
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Arrays*7*10*ClassType
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Array*8*10*ClassType
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.CentralProcessorHostsQueue*21*10*RelationshipType
-Service Model\Classes\ComputerRoles.mpx*PureStorage.FlashArrays.ComputerHostsSeed*10*10*RelationshipType
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ApplicationContainsCentral*7*10*RelationshipType
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ApplicationContainsArrays*12*10*RelationshipType
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ArraysContainsArrayServer*17*10*RelationshipType
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ArraysContainsArrayClient*22*10*RelationshipType
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.CentralContainsCentralProcessor*27*10*RelationshipType
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.CentralContainsCentralReceiver*32*10*RelationshipType
-Service Model\Classes\Dependencies.mpx*PureStorage.FlashArrays.CentralContainsWebSites*11*10*RelationshipType
-Service Model\Classes\Dependencies.mpx*PureStorage.FlashArrays.WebSitesContainsWebSite*16*10*RelationshipType
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.ArrayClient*6*8*Discovery
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Seed*58*8*Discovery
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.CentralReceiver*100*8*Discovery
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.ArrayServer*128*8*Discovery
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.CentralProcessor*180*8*Discovery
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.ArrayQueues*252*8*Discovery
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.CentralReceiver*6*8*View
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.ArrayClient*31*8*View
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Queue*34*8*View
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Seed*37*8*View
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.CentralProcessor*40*8*View
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.ArrayServer*43*8*View
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ComputerRole.ArraysBase*5*10*ClassType
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.Arrays*9*10*ClassType
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ArraysComponents*15*10*ClassType
+Service Model\Classes\NewGroups.mpx*Pure.FlashArrays.InstanceGroups*7*10*ClassType
+Service Model\Classes\NewGroups.mpx*Pure.FlashArrays.ComputerGroups*8*10*ClassType
+Service Model\Classes\NewGroups.mpx*Pure.FlashArrays.HealthRollup*9*10*ClassType
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ArraysHostComponents*23*8*RelationshipType
+Service Model\Classes\NewRelationships.mpx*Pure.FlashArrays.HealthRollupContainsArrays*6*10*RelationshipType
+Health Model\Modules.mpx*Pure.FlashArrays.DataSource.AccessArrays*6*8*DataSourceModuleType
+Health Model\Modules.mpx*Pure.FlashArrays.Probe.AccessArrays*38*8*ProbeActionModuleType
+Health Model\Modules.mpx*Pure.FlashArrays.Monitor.AccessArrays*63*8*UnitMonitorType
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Controllers.PowerShell*6*8*Discovery
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal*6*8*UnitMonitor
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.PowerShell*24*8*UnitMonitor
+Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays*6*8*View
+Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays*9*8*View
 Presentation\Folders.mpx*PureStorage.FlashArrays.Folder*5*8*Folder
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.CentralReceiver.FolderItem*48*8*FolderItem
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.ArrayClient.FolderItem*49*8*FolderItem
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Queue.FolderItem*50*8*FolderItem
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Seed.FolderItem*51*8*FolderItem
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.CentralProcessor.FolderItem*52*8*FolderItem
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.ArrayServer.FolderItem*53*8*FolderItem
+Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays.FolderItem*14*8*FolderItem
+Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays.FolderItem*15*8*FolderItem
+Health Model\Modules.mpx*Pure.FlashArrays.StringResources.AccessArrays*107*8*StringResource
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal.AlertMessage*40*8*StringResource
+Health Model\Modules.mpx*Pure.FlashArrays.StringResources.AccessArrays*113*10*DisplayString
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal*46*10*DisplayString
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal.AlertMessage*50*10*DisplayString
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal*54*10*DisplayString*SubElementID*Running
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.ArraysComponents.ControllerNormal*58*10*DisplayString*SubElementID*NotRunning
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.PowerShell*62*10*DisplayString
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.PowerShell*66*10*DisplayString*SubElementID*Success
+Health Model\Monitors.mptg.mpx*PureStorage.FlashArrays.Monitor.PowerShell*70*10*DisplayString*SubElementID*Failure
 Presentation\Folders.mpx*PureStorage.FlashArrays.Folder*14*10*DisplayString
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.CentralReceiver*59*10*DisplayString
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.ArrayClient*63*10*DisplayString
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Queue*67*10*DisplayString
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Seed*71*10*DisplayString
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.CentralProcessor*75*10*DisplayString
-Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.ArrayServer*79*10*DisplayString
+Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays*21*10*DisplayString
+Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays*25*10*DisplayString
 Project.mpx*PureStorage.FlashArrays*5*10*DisplayString
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayComputer*19*10*DisplayString
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayComputer*23*10*DisplayString*SubElementID*ArrayCode
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayServer*28*10*DisplayString
-Service Model\Classes\Arrays.mpx*PureStorage.FlashArrays.ComputerRole.ArrayClient*33*10*DisplayString
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralServer*32*10*DisplayString
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralReceiver*37*10*DisplayString
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralProcessor*42*10*DisplayString
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralProcessor*47*10*DisplayString*SubElementID*QueuePath
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralProcessor*52*10*DisplayString*SubElementID*DatabaseServer
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.ComputerRole.CentralProcessor*57*10*DisplayString*SubElementID*DatabaseName
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.Queue*62*10*DisplayString
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.Queue*67*10*DisplayString*SubElementID*ArrayCode
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.Queue*72*10*DisplayString*SubElementID*FolderPath
-Service Model\Classes\Central.mpx*PureStorage.FlashArrays.CentralProcessorHostsQueue*77*10*DisplayString
-Service Model\Classes\ComputerRoles.mpx*PureStorage.FlashArrays.ComputerRole*20*10*DisplayString
-Service Model\Classes\ComputerRoles.mpx*PureStorage.FlashArrays.Seed*25*10*DisplayString
-Service Model\Classes\ComputerRoles.mpx*PureStorage.FlashArrays.ComputerHostsSeed*30*10*DisplayString
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ApplicationContainsCentral*44*10*DisplayString
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ApplicationContainsArrays*49*10*DisplayString
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ArraysContainsArrayServer*54*10*DisplayString
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.ArraysContainsArrayClient*59*10*DisplayString
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.CentralContainsCentralProcessor*64*10*DisplayString
-Service Model\Classes\Containments.mpx*PureStorage.FlashArrays.CentralContainsCentralReceiver*69*10*DisplayString
-Service Model\Classes\Dependencies.mpx*PureStorage.FlashArrays.WebSites*28*10*DisplayString
-Service Model\Classes\Dependencies.mpx*PureStorage.FlashArrays.CentralContainsWebSites*33*10*DisplayString
-Service Model\Classes\Dependencies.mpx*PureStorage.FlashArrays.WebSitesContainsWebSite*38*10*DisplayString
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Application*20*10*DisplayString
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Central*25*10*DisplayString
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Arrays*30*10*DisplayString
-Service Model\Classes\Rollups.mpx*PureStorage.FlashArrays.Array*35*10*DisplayString*SubElementID*ArrayCode
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.ArrayClient*288*10*DisplayString
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Seed*292*10*DisplayString
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.CentralReceiver*296*10*DisplayString
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.ArrayServer*300*10*DisplayString
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.CentralProcessor*304*10*DisplayString
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.ArrayQueues*308*10*DisplayString
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ComputerRole.ArraysBase*33*10*DisplayString
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ComputerRole.ArraysBase*38*10*DisplayString*SubElementID*Version
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.Arrays*43*10*DisplayString
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ArraysComponents*48*10*DisplayString
+Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.ArraysHostComponents*53*10*DisplayString
+Service Model\Classes\NewGroups.mpx*Pure.FlashArrays.InstanceGroups*17*10*DisplayString
+Service Model\Classes\NewGroups.mpx*Pure.FlashArrays.ComputerGroups*22*10*DisplayString
+Service Model\Classes\NewGroups.mpx*Pure.FlashArrays.HealthRollup*27*10*DisplayString
+Service Model\Classes\NewRelationships.mpx*Pure.FlashArrays.HealthRollupContainsArrays*17*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Controllers.PowerShell*39*10*DisplayString

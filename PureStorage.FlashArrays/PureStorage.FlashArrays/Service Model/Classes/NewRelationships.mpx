@@ -1,0 +1,25 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <RelationshipTypes>
+
+        <RelationshipType ID="Pure.FlashArrays.HealthRollupContainsArrays" Base="System!System.Containment" Abstract="false" Accessibility="Public">
+          <Source ID="Source" Type="Pure.FlashArrays.HealthRollup"/>
+          <Target ID="Target" Type="Pure.FlashArrays.Arrays"/>
+        </RelationshipType>
+        
+      </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Pure.FlashArrays.HealthRollupContainsArrays">
+          <Name>Pure FlashArrays Health Rollup Contains Arrays</Name>
+          <Description></Description>
+        </DisplayString>
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

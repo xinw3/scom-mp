@@ -1,18 +1,19 @@
-param($sourceId, $managedEntityId, $topFolder, $computerName)
+param($sourceId, $managedEntityId, $computerName)
 $api = New-Object -ComObject 'MOM.ScriptAPI'
 $discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
-$subFolders = Get-ChildItem -Path $topFolder | where {$_.psIsContainer -eq $true}
+
 #foreach($subFolder in $subFolders)
 #{
 #    $subFolder.FullName
 #}
 
-foreach ($subFolder in $subFolders)
+for ($i=1; $i -le 2; $i++)
 {
-    $instance = $discoveryData.CreateClassInstance("$MPElement[Name='PureStorage.FlashArrays.Queue']$")
-    # $instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
-    $instance.AddProperty("$MPElement[Name='PureStorage.FlashArrays.Queue']/ArrayCode$", $subFolder.Name)
-    $instance.AddProperty("$MPElement[Name='PureStorage.FlashArrays.Queue']/FolderPath$", $subFolder.FullName)
+    $instance = $discoveryData.CreateClassInstance("$MPElement[Name='Pure.FlashArrays.Arrays']$")
+    $instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+    $instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Controllers$", "Controller " + $i)
+    $instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Hosts$", "Host " + $i)
+    $instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Volumes$", "Volume " + $i)
 
     $discoveryData.AddInstance($instance)
 }

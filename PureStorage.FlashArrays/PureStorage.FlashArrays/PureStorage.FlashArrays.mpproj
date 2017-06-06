@@ -64,6 +64,13 @@
     </ManagementPackReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Health Model\Modules.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Health Model\Monitors.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Health Model\Monitors.mptg</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\Folders.mpx">
       <SubType>Code</SubType>
     </Compile>
@@ -74,22 +81,13 @@
     <Compile Include="Project.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service Model\Classes\Arrays.mpx">
+    <Compile Include="Service Model\Classes\NewArrays.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service Model\Classes\Central.mpx">
+    <Compile Include="Service Model\Classes\NewGroups.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service Model\Classes\ComputerRoles.mpx">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service Model\Classes\Containments.mpx">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service Model\Classes\Dependencies.mpx">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service Model\Classes\Rollups.mpx">
+    <Compile Include="Service Model\Classes\NewRelationships.mpx">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service Model\Discoveries\Discoveries.mptg.mpx">
@@ -98,12 +96,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Health Model" />
     <Folder Include="Presentation" />
     <Folder Include="Service Model" />
     <Folder Include="Service Model\Classes" />
     <Folder Include="Service Model\Discoveries" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Health Model\Monitors.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
     <Content Include="Presentation\Views.mptg">
       <SubType>Content</SubType>
       <Generator>FragmentGenerator</Generator>
@@ -114,6 +117,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Health Model\MonitorArrays.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\Demo.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\DiscoverArrays.ps1" />
   </ItemGroup>
