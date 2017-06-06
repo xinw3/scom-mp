@@ -44,8 +44,8 @@
           <Composite>
             <MemberModules>
               <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
-                <ScriptName>MonitorArrays.ps1</ScriptName>
-                <ScriptBody>$IncludeFileContent/Health Model/MonitorArrays.ps1</ScriptBody>
+                <ScriptName>MonitorDemo.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1</ScriptBody>
                 <TimeoutSeconds>120</TimeoutSeconds>
               </ProbeAction>
             </MemberModules>
@@ -80,23 +80,66 @@
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <TimeoutSeconds>100</TimeoutSeconds>
             </DataSource>
-            <ProbeAction ID="Monitor.PassThru" TypeID="System!System.PassThroughProbe" />
-             <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
-              <ComputerName>scom-xin</ComputerName>
-             </ProbeAction>
+            <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+              <ComputerName>$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$</ComputerName>
+            </ProbeAction>
+            <ConditionDetection ID="InstanceFilter.Success" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">vm-mudassir-latif2</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+              
+            </ConditionDetection>
+            <ConditionDetection ID="InstanceFilter.Failure" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                  </ValueExpression>
+                  <Operator>NotEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="String">vm-mudassir-latif2</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+              
+            </ConditionDetection>
           </MemberModules>
           <RegularDetections>
             <RegularDetection MonitorTypeStateID="Success">
-              <Node ID="Probe">
-                <Node ID="Monitor.PassThru" />
+              <Node ID="InstanceFilter.Success">
+                <Node ID="Probe">
+                  <Node ID="DS.Monitor" />
+                </Node>
               </Node>
             </RegularDetection>
             <RegularDetection MonitorTypeStateID="Failure">
-              <Node ID="Probe">
-                <Node ID="Monitor.PassThru" />
+              <Node ID="InstanceFilter.Failure">
+                <Node ID="Probe">
+                  <Node ID="DS.Monitor" />
+                </Node>
               </Node>
             </RegularDetection>
           </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="Success">
+              <Node ID="InstanceFilter.Success">
+                <Node ID="Probe" />
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Failure">
+              <Node ID="InstanceFilter.Failure">
+                <Node ID="Probe" />
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
         </MonitorImplementation>
         
       </UnitMonitorType>

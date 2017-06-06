@@ -2,60 +2,23 @@
   <TypeDefinitions>
     <EntityTypes>
       <ClassTypes>
-        <ClassType ID="Pure.FlashArrays.ComputerRole.ArraysBase" Base="Windows!Microsoft.Windows.ComputerRole" Accessibility="Public" Abstract="true" Hosted="true" Singleton="false" >
+        <ClassType ID="Pure.FlashArrays.Arrays" Base="Windows!Microsoft.Windows.LocalApplication" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" >
           <Property ID="Version" Key="false" Type="string"/>
-        </ClassType>
-        
-        <ClassType ID="Pure.FlashArrays.Arrays" Base="Pure.FlashArrays.ComputerRole.ArraysBase" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" >
+          <Property ID="ArrayId" Key="true" Type="string" />
           <Property ID="Controllers" Key="false" Type="string" />
           <Property ID="Hosts" Key="false" Type="string" />
           <Property ID="Volumes" Key="false" Type="string" />
         </ClassType>
-        
-        <ClassType ID="Pure.FlashArrays.ArraysComponents" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" >
-          <Property ID="Controllers" Key="false" Type="string" />
-          <Property ID="Hosts" Key="false" Type="string" />
-          <Property ID="Volumes" Key="false" Type="string" />
-        </ClassType>
-      
       </ClassTypes>
-    <RelationshipTypes>
-      <RelationshipType ID="Pure.FlashArrays.ArraysHostComponents" Base="System!System.Hosting" Accessibility="Public" Abstract="false">
-        <Source ID="Source" Type="Pure.FlashArrays.Arrays"/>
-        <Target ID="Target" Type="Pure.FlashArrays.ArraysComponents"/> 
-      </RelationshipType>
-    </RelationshipTypes>
     </EntityTypes>
   </TypeDefinitions>
   <LanguagePacks>
     <LanguagePack ID="ENU" IsDefault="true">
       <DisplayStrings>
-        <DisplayString ElementID="Pure.FlashArrays.ComputerRole.ArraysBase">
-          <Name>FlashArrays Computer Role ArrayBase Class</Name>
-          <Description></Description>
-        </DisplayString>
-
-        <DisplayString ElementID="Pure.FlashArrays.ComputerRole.ArraysBase" SubElementID="Version">
-          <Name>Version</Name>
-          <Description></Description>
-        </DisplayString>
-
         <DisplayString ElementID="Pure.FlashArrays.Arrays">
-          <Name>Pure Storage FlashArrays Arrays</Name>
+          <Name>Pure Storage FlashArrays</Name>
           <Description></Description>
         </DisplayString>
-      
-        <DisplayString ElementID="Pure.FlashArrays.ArraysComponents">
-          <Name>Pure Storage FlashArrays Components</Name>
-          <Description></Description>
-        </DisplayString>
-        
-        <DisplayString ElementID="Pure.FlashArrays.ArraysHostComponents">
-          <Name>Pure Arrays Host Components</Name>
-          <Description></Description>
-        </DisplayString>
-      
-    
       </DisplayStrings>
     </LanguagePack>
   </LanguagePacks>

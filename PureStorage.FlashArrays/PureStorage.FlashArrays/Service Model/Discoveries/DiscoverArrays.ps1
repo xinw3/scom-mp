@@ -1,13 +1,15 @@
-$arrayName = "vm-mudassir-latif2.dev.purestorage.com"
-$arrayPassword = "pureuser"
-$securePassword = ConvertTo-SecureString -String $arrayPassword -AsPlainText -Force
-$myArray = New-PfaArray -Version 1.3 -EndPoint $arrayName -UserName pureuser -Password $securePassword -IgnoreCertificateError
+param($sourceId, $managedEntityId, $computerName, $arrayId)
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$api.LogScriptEvent("DiscoverArrays.ps1", 2222, 0, "Discover volumes")
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
 
-### Print to hose ###
-"`n***** Now connect to *****"
-$myArray
+$instance = $discoveryData.CreateClassInstance("$MPElement[Name='Pure.FlashArrays.Arrays']$")
+$instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+$instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayId$", $arrayId)
 
-$myVolumes = Get-PfaVolumes -Array $myArray
-"`n***** List Volumes *****"
-$myVolumes
+$api.LogScriptEvent("DiscoverArrays.ps1", 2223, 0, "Finish Discovery")
+
+
+$discoveryData.AddInstance($instance)
+$discoveryData
 

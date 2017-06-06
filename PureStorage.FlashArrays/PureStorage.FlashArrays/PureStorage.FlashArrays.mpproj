@@ -30,6 +30,12 @@
     <AssemblyOriginatorKeyFile />
   </PropertyGroup>
   <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.DataWarehouse.Library">
+      <HintPath>C:\Program Files (x86)\System Center Management Packs\Microsoft.SystemCenter.DataWarehouse.Library.mp</HintPath>
+      <Alias>SCDW</Alias>
+      <MinVersion>7.1.10226.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
     <ManagementPackReference Include="Microsoft.SystemCenter.InstanceGroup.Library">
       <HintPath>C:\Program Files (x86)\System Center Visual Studio Authoring Extensions\References\OM2012R2\Microsoft.SystemCenter.InstanceGroup.Library.mp</HintPath>
       <Alias>InstanceGroup</Alias>
@@ -67,9 +73,9 @@
     <Compile Include="Health Model\Modules.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Health Model\Monitors.mptg.mpx">
+    <Compile Include="Health Model\NewMonitors.mptg.mpx">
       <SubType>Code</SubType>
-      <DependentUpon>Health Model\Monitors.mptg</DependentUpon>
+      <DependentUpon>Health Model\NewMonitors.mptg</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Folders.mpx">
       <SubType>Code</SubType>
@@ -82,12 +88,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service Model\Classes\NewArrays.mpx">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service Model\Classes\NewGroups.mpx">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service Model\Classes\NewRelationships.mpx">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service Model\Discoveries\Discoveries.mptg.mpx">
@@ -103,7 +103,7 @@
     <Folder Include="Service Model\Discoveries" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Health Model\Monitors.mptg">
+    <Content Include="Health Model\NewMonitors.mptg">
       <SubType>Content</SubType>
       <Generator>FragmentGenerator</Generator>
     </Content>
@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Health Model\MonitorArrays.ps1" />
+    <EmbeddedResource Include="Health Model\MonitorDemo.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\Demo.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\DiscoverArrays.ps1" />
   </ItemGroup>
