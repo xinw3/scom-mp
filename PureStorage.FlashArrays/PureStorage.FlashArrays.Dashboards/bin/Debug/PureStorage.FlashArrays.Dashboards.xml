@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays.Dashboards</ID>
-      <Version>1.0.0.50</Version>
+      <Version>1.0.0.52</Version>
     </Identity>
     <Name>PureStorage.FlashArrays.Dashboards</Name>
     <References>

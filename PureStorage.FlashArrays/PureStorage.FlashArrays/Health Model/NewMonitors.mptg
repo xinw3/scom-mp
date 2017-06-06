@@ -1,46 +1,9 @@
 <TemplateGroup>
   <Instances>
-    <Instance ID="Instance1cb8bbbf42bb4bd8ba0ce5a2d4aaa2da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
-      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <MonitorType>Windows!Microsoft.Windows.TimedScript.TwoStateMonitorType</MonitorType>
-        <MonitorConfig>&lt;IntervalSeconds&gt;900&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;MonitorDemo.ps1&lt;/ScriptName&gt;&lt;Arguments&gt;&lt;/Arguments&gt;&lt;ScriptBody&gt;$IncludeFileContent/Health Model/MonitorDemo.ps1$&lt;/ScriptBody&gt;&lt;SecureInput&gt;&lt;/SecureInput&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;&lt;ErrorExpression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;XPathQuery Type="String"&gt;$Data/Property[@Name='InstanceName']$&lt;/XPathQuery&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value Type="String"&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/ErrorExpression&gt;&lt;SuccessExpression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;XPathQuery Type="String"&gt;$Data/Property[@Name='Value']$&lt;/XPathQuery&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value Type="String"&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/SuccessExpression&gt;</MonitorConfig>
-        <MonitorOperationalStates>
-          <OperationalState>
-            <OperationalStateId>Error</OperationalStateId>
-            <OperationalStateDisplayName>Error</OperationalStateDisplayName>
-            <MonitorTypeStateId>Error</MonitorTypeStateId>
-            <HealthState>Error</HealthState>
-          </OperationalState>
-          <OperationalState>
-            <OperationalStateId>Success</OperationalStateId>
-            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
-            <MonitorTypeStateId>Success</MonitorTypeStateId>
-            <HealthState>Success</HealthState>
-          </OperationalState>
-        </MonitorOperationalStates>
-        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
-        <Accessibility>Internal</Accessibility>
-        <Id>NewMonitor.PowerShell.Arrays</Id>
-        <DisplayName>New Monitor For PowerShell Script</DisplayName>
-        <Description>Description for the new unit monitor.</Description>
-        <Target>Pure.FlashArrays.Arrays</Target>
-        <Enabled>true</Enabled>
-        <Category>AvailabilityHealth</Category>
-        <Remotable>true</Remotable>
-        <Priority>Normal</Priority>
-        <AlertAutoResolve>true</AlertAutoResolve>
-        <AlertOnState>Error</AlertOnState>
-        <AlertPriority>Normal</AlertPriority>
-        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
-        <AlertName>Array is not running.</AlertName>
-        <AlertDescription>[This is an alert description in Monitor.PowerShell]I still need to see the data passed to the monitor so that I can define some alert description.</AlertDescription>
-        <ConfirmDelivery>false</ConfirmDelivery>
-      </UnitMonitorConfig>
-    </Instance>
     <Instance ID="Instance4f294b0d7d5d47a8beef571bad043bea" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
       <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
         <MonitorType>Pure.FlashArrays.Monitor.AccessArrays</MonitorType>
-        <MonitorConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</MonitorConfig>
+        <MonitorConfig>&lt;IntervalSeconds&gt;120&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</MonitorConfig>
         <MonitorOperationalStates>
           <OperationalState>
             <OperationalStateId>Success</OperationalStateId>
@@ -79,7 +42,7 @@
         <Id>Rule.Modules.AccessArrays</Id>
         <DisplayName>Rules for Accessing Arrays</DisplayName>
         <Description>Description for the new rule</Description>
-        <Category>None</Category>
+        <Category>PerformanceCollection</Category>
         <ConfirmDelivery>false</ConfirmDelivery>
         <Target>Pure.FlashArrays.Arrays</Target>
         <Enabled>true</Enabled>
@@ -93,7 +56,9 @@
             <DataSourceType>Pure.FlashArrays.DataSource.AccessArrays</DataSourceType>
           </RuleDataSourceItem>
         </DataSources>
+        <ConditionDetectionConfig>&lt;ObjectName&gt;ArrayId&lt;/ObjectName&gt;&lt;CounterName&gt;ArrayId Detected&lt;/CounterName&gt;&lt;InstanceName /&gt;&lt;Value&gt;$Data/Property[@Name='InstanceName']$&lt;/Value&gt;</ConditionDetectionConfig>
         <ConditionDetectionId>CD</ConditionDetectionId>
+        <ConditionDetectionType>Perf!System.Performance.DataGenericMapper</ConditionDetectionType>
         <WriteActions>
           <RuleWriteActionItem>
             <WriteActionId>WriteToDB</WriteActionId>

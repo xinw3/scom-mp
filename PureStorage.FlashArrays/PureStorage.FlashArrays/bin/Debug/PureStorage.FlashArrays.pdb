@@ -4,26 +4,20 @@ Health Model\Modules.mpx*Pure.FlashArrays.Probe.AccessArrays*38*8*ProbeActionMod
 Health Model\Modules.mpx*Pure.FlashArrays.Monitor.AccessArrays*63*8*UnitMonitorType
 Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Controllers.PowerShell*6*8*Discovery
 Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Rule.Modules.AccessArrays*6*8*Rule
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays*21*8*UnitMonitor
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*65*8*UnitMonitor
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*27*8*UnitMonitor
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays*6*8*View
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays*31*8*View
 Presentation\Folders.mpx*PureStorage.FlashArrays.Folder*5*8*Folder
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays.FolderItem*36*8*FolderItem
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays.FolderItem*37*8*FolderItem
 Health Model\Modules.mpx*Pure.FlashArrays.StringResources.AccessArrays*150*8*StringResource
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays.AlertMessage*87*8*StringResource
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage*88*8*StringResource
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage*49*8*StringResource
 Health Model\Modules.mpx*Pure.FlashArrays.StringResources.AccessArrays*156*10*DisplayString
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays*94*10*DisplayString
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays.AlertMessage*98*10*DisplayString
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays*102*10*DisplayString*SubElementID*Error
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays*106*10*DisplayString*SubElementID*Success
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*110*10*DisplayString
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage*114*10*DisplayString
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*118*10*DisplayString*SubElementID*Success
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*122*10*DisplayString*SubElementID*Failure
-Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Rule.Modules.AccessArrays*126*10*DisplayString
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*55*10*DisplayString
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage*59*10*DisplayString
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*63*10*DisplayString*SubElementID*Success
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*67*10*DisplayString*SubElementID*Failure
+Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Rule.Modules.AccessArrays*71*10*DisplayString
 Presentation\Folders.mpx*PureStorage.FlashArrays.Folder*14*10*DisplayString
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays*43*10*DisplayString
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays*47*10*DisplayString

@@ -18,7 +18,7 @@
             <MemberModules>
               <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
                 <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
-                <SyncTime>$Config/SyncTime$</SyncTime>
+                <SyncTime />
               </DataSource>
               <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
                 <ComputerName>scom-xin</ComputerName>
@@ -76,7 +76,7 @@
         </OverrideableParameters>
         <MonitorImplementation>
           <MemberModules>
-            <DataSource ID="DS.Monitor" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
+            <DataSource ID="DS" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <TimeoutSeconds>100</TimeoutSeconds>
             </DataSource>
@@ -116,14 +116,14 @@
             <RegularDetection MonitorTypeStateID="Success">
               <Node ID="InstanceFilter.Success">
                 <Node ID="Probe">
-                  <Node ID="DS.Monitor" />
+                  <Node ID="DS" />
                 </Node>
               </Node>
             </RegularDetection>
             <RegularDetection MonitorTypeStateID="Failure">
               <Node ID="InstanceFilter.Failure">
                 <Node ID="Probe">
-                  <Node ID="DS.Monitor" />
+                  <Node ID="DS" />
                 </Node>
               </Node>
             </RegularDetection>

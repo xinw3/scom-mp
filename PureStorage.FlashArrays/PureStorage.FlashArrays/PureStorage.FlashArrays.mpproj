@@ -68,6 +68,12 @@
       <Alias>Visualization</Alias>
       <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
+    <ManagementPackReference Include="System.Performance.Library">
+      <HintPath>C:\Program Files (x86)\System Center Management Packs\System.Performance.Library.mp</HintPath>
+      <Alias>Perf</Alias>
+      <MinVersion>7.0.8437.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Health Model\Modules.mpx">

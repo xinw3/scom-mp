@@ -3,10 +3,15 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.224</Version>
+      <Version>1.0.0.235</Version>
     </Identity>
     <Name>PureStorage.FlashArrays</Name>
     <References>
+      <Reference Alias="SCDW">
+        <ID>Microsoft.SystemCenter.DataWarehouse.Library</ID>
+        <Version>7.1.10226.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
       <Reference Alias="SC">
         <ID>Microsoft.SystemCenter.Library</ID>
         <Version>7.0.8433.0</Version>
@@ -25,6 +30,11 @@
       <Reference Alias="System">
         <ID>System.Library</ID>
         <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Perf">
+        <ID>System.Performance.Library</ID>
+        <Version>7.0.8437.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
     </References>
@@ -111,7 +121,7 @@
         </OverrideableParameters>
         <MonitorImplementation>
           <MemberModules>
-            <DataSource ID="DS.Monitor" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
+            <DataSource ID="DS" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <TimeoutSeconds>100</TimeoutSeconds>
             </DataSource>
@@ -149,14 +159,14 @@
             <RegularDetection MonitorTypeStateID="Success">
               <Node ID="InstanceFilter.Success">
                 <Node ID="Probe">
-                  <Node ID="DS.Monitor" />
+                  <Node ID="DS" />
                 </Node>
               </Node>
             </RegularDetection>
             <RegularDetection MonitorTypeStateID="Failure">
               <Node ID="InstanceFilter.Failure">
                 <Node ID="Probe">
-                  <Node ID="DS.Monitor" />
+                  <Node ID="DS" />
                 </Node>
               </Node>
             </RegularDetection>
@@ -228,90 +238,26 @@ $discoveryData
     </Discoveries>
     <Rules>
       <Rule ID="PureStorage.FlashArrays.Rule.Modules.AccessArrays" Target="Pure.FlashArrays.Arrays" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
-        <Category>None</Category>
+        <Category>PerformanceCollection</Category>
         <DataSources>
           <DataSource ID="DS" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
             <IntervalSeconds>120</IntervalSeconds>
             <TimeoutSeconds>300</TimeoutSeconds>
           </DataSource>
         </DataSources>
+        <ConditionDetection ID="CD" TypeID="Perf!System.Performance.DataGenericMapper">
+          <ObjectName>ArrayId</ObjectName>
+          <CounterName>ArrayId Detected</CounterName>
+          <InstanceName />
+          <Value>$Data/Property[@Name='InstanceName']$</Value>
+        </ConditionDetection>
         <WriteActions>
-          <WriteAction ID="WriteToDB" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagWriteAction">
-            <ScriptName>MonitorDemo.ps1</ScriptName>
-            <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1</ScriptBody>
-            <TimeoutSeconds>300</TimeoutSeconds>
-          </WriteAction>
+          <WriteAction ID="WriteToDB" TypeID="SC!Microsoft.SystemCenter.CollectPerformanceData" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData" />
         </WriteActions>
       </Rule>
     </Rules>
     <Monitors>
-      <UnitMonitor ID="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays" Accessibility="Internal" Enabled="true" Target="Pure.FlashArrays.Arrays" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="Windows!Microsoft.Windows.TimedScript.TwoStateMonitorType" ConfirmDelivery="false">
-        <Category>AvailabilityHealth</Category>
-        <AlertSettings AlertMessage="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays.AlertMessage">
-          <AlertOnState>Error</AlertOnState>
-          <AutoResolve>true</AutoResolve>
-          <AlertPriority>Normal</AlertPriority>
-          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
-        </AlertSettings>
-        <OperationalStates>
-          <OperationalState ID="Error" MonitorTypeStateID="Error" HealthState="Error" />
-          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
-        </OperationalStates>
-        <Configuration>
-          <IntervalSeconds>900</IntervalSeconds>
-          <SyncTime />
-          <ScriptName>MonitorDemo.ps1</ScriptName>
-          <Arguments></Arguments>
-          <ScriptBody><![CDATA[#param($arrayId, $userName, $password)
-
-$api = New-Object -ComObject 'MOM.ScriptAPI'
-$api.LogScriptEvent("MonitorDemo.ps1", 3333, 0, "Monitor Arrays")
-
-$arrayId = "vm-mudassir-latif2"
-$userName = "pureuser"
-$password = "pureuser"
-
-$endPoint = $arrayId + ".dev.purestorage.com"
-
-$api.LogScriptEvent("MonitorDemo.ps1", 3334, 0, $endpoints)
-
-
-
-$bag = $api.CreatePropertyBag()
-$bag.AddValue("Value", "10")
-$bag.AddValue("InstanceName", $arrayId)
-
-$api.LogScriptEvent("MonitorArrays.ps1", 3336, 0, "Finish add value")
-
-
-#$api.Return($bag)
-$bag]]></ScriptBody>
-          <SecureInput></SecureInput>
-          <TimeoutSeconds>300</TimeoutSeconds>
-          <ErrorExpression>
-            <SimpleExpression>
-              <ValueExpression>
-                <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
-              </ValueExpression>
-              <Operator>Equal</Operator>
-              <ValueExpression>
-                <Value Type="String">vm-mudassir-latif2</Value>
-              </ValueExpression>
-            </SimpleExpression>
-          </ErrorExpression>
-          <SuccessExpression>
-            <SimpleExpression>
-              <ValueExpression>
-                <XPathQuery Type="String">$Data/Property[@Name='Value']$</XPathQuery>
-              </ValueExpression>
-              <Operator>Equal</Operator>
-              <ValueExpression>
-                <Value Type="String">vm-mudassir-latif2</Value>
-              </ValueExpression>
-            </SimpleExpression>
-          </SuccessExpression>
-        </Configuration>
-      </UnitMonitor>
       <UnitMonitor ID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays" Accessibility="Public" Enabled="true" Target="Pure.FlashArrays.Arrays" ParentMonitorID="Health!System.Health.PerformanceState" Remotable="true" Priority="Normal" TypeID="Pure.FlashArrays.Monitor.AccessArrays" ConfirmDelivery="false">
         <Category>PerformanceHealth</Category>
         <AlertSettings AlertMessage="PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage">
@@ -325,7 +271,7 @@ $bag]]></ScriptBody>
           <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
         </OperationalStates>
         <Configuration>
-          <IntervalSeconds>14400</IntervalSeconds>
+          <IntervalSeconds>120</IntervalSeconds>
           <SyncTime />
           <TimeoutSeconds>300</TimeoutSeconds>
         </Configuration>
@@ -372,7 +318,6 @@ $bag]]></ScriptBody>
     </FolderItems>
     <StringResources>
       <StringResource ID="Pure.FlashArrays.StringResources.AccessArrays" />
-      <StringResource ID="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays.AlertMessage" />
       <StringResource ID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage" />
     </StringResources>
   </Presentation>
@@ -382,22 +327,6 @@ $bag]]></ScriptBody>
         <DisplayString ElementID="Pure.FlashArrays.StringResources.AccessArrays">
           <Name>Volumes</Name>
           <Description>$Data/Context/Value$</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays">
-          <Name>New Monitor For PowerShell Script</Name>
-          <Description>Description for the new unit monitor.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays.AlertMessage">
-          <Name>Array is not running.</Name>
-          <Description>[This is an alert description in Monitor.PowerShell]I still need to see the data passed to the monitor so that I can define some alert description.</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays" SubElementID="Error">
-          <Name>Error</Name>
-          <Description>Error</Description>
-        </DisplayString>
-        <DisplayString ElementID="PureStorage.FlashArrays.NewMonitor.PowerShell.Arrays" SubElementID="Success">
-          <Name>Success</Name>
-          <Description>Success</Description>
         </DisplayString>
         <DisplayString ElementID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays">
           <Name>Arrays Space Monitor</Name>
