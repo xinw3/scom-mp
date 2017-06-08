@@ -1,0 +1,76 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance4f294b0d7d5d47a8beef571bad043bea" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>Pure.FlashArrays.Monitor.AccessArrays</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;120&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Success</OperationalStateId>
+            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
+            <MonitorTypeStateId>Success</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Failure</OperationalStateId>
+            <OperationalStateDisplayName>Failure</OperationalStateDisplayName>
+            <MonitorTypeStateId>Failure</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.PerformanceState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.Modules.AccessArrays</Id>
+        <DisplayName>Arrays Space Monitor</DisplayName>
+        <Description>Monitor the space of the array</Description>
+        <Target>Pure.FlashArrays.Arrays</Target>
+        <Enabled>true</Enabled>
+        <Category>PerformanceHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Arrays do not have much space.</AlertName>
+        <AlertDescription>Arrays do not have much space.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance27e5e77c3c6840f5a30fb9b6a2f4218c" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomRule" Version="1.0.0.0">
+      <CustomRuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Rule.Modules.AccessArrays</Id>
+        <DisplayName>Rules for Accessing Arrays</DisplayName>
+        <Description>Description for the new rule</Description>
+        <Category>PerformanceCollection</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>Pure.FlashArrays.Arrays</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <DataSources>
+          <RuleDataSourceItem>
+            <DataSourceId>DS</DataSourceId>
+            <DataSourceConfig>&lt;IntervalSeconds&gt;120&lt;/IntervalSeconds&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+            <DataSourceType>Pure.FlashArrays.DataSource.AccessArrays</DataSourceType>
+          </RuleDataSourceItem>
+        </DataSources>
+        <ConditionDetectionConfig>&lt;ObjectName&gt;ArrayId&lt;/ObjectName&gt;&lt;CounterName&gt;ArrayId Detected&lt;/CounterName&gt;&lt;InstanceName /&gt;&lt;Value&gt;$Data/Property[@Name='InstanceName']$&lt;/Value&gt;</ConditionDetectionConfig>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <ConditionDetectionType>Perf!System.Performance.DataGenericMapper</ConditionDetectionType>
+        <WriteActions>
+          <RuleWriteActionItem>
+            <WriteActionId>WriteToDB</WriteActionId>
+            <WriteActionConfig />
+            <WriteActionType>SC!Microsoft.SystemCenter.CollectPerformanceData</WriteActionType>
+          </RuleWriteActionItem>
+          <RuleWriteActionItem>
+            <WriteActionId>WriteToDW</WriteActionId>
+            <WriteActionType>SCDW!Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData</WriteActionType>
+          </RuleWriteActionItem>
+        </WriteActions>
+      </CustomRuleConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

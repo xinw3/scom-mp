@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ManagementPack SchemaVersion="2.0" ContentReadable="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manifest>
+    <Identity>
+      <ID>PureStorage.FlashArrays</ID>
+      <Version>1.0.0.235</Version>
+    </Identity>
+    <Name>PureStorage.FlashArrays</Name>
+    <References>
+      <Reference Alias="SCDW">
+        <ID>Microsoft.SystemCenter.DataWarehouse.Library</ID>
+        <Version>7.1.10226.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SC">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8433.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Windows">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8433.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Perf">
+        <ID>System.Performance.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Pure.FlashArrays.Arrays" Base="Windows!Microsoft.Windows.LocalApplication" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+          <Property ID="Version" Key="false" Type="string" />
+          <Property ID="ArrayId" Key="true" Type="string" />
+          <Property ID="Controllers" Key="false" Type="string" />
+          <Property ID="Hosts" Key="false" Type="string" />
+          <Property ID="Volumes" Key="false" Type="string" />
+        </ClassType>
+      </ClassTypes>
+    </EntityTypes>
+    <ModuleTypes>
+      <DataSourceModuleType ID="Pure.FlashArrays.DataSource.AccessArrays" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="SyncTime" minOccurs="0" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="TimeoutSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+                <ComputerName>scom-xin</ComputerName>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Schedule" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <ProbeActionModuleType ID="Pure.FlashArrays.Probe.AccessArrays" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="ComputerName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>MonitorDemo.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1</ScriptBody>
+                <TimeoutSeconds>120</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Script" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <TriggerOnly>true</TriggerOnly>
+      </ProbeActionModuleType>
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="Pure.FlashArrays.Monitor.AccessArrays" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="Success" NoDetection="false" />
+          <MonitorTypeState ID="Failure" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="TimeoutSeconds" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <TimeoutSeconds>100</TimeoutSeconds>
+            </DataSource>
+            <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+              <ComputerName>$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$</ComputerName>
+            </ProbeAction>
+            <ConditionDetection ID="InstanceFilter.Success" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">vm-mudassir-latif2</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="InstanceFilter.Failure" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                  </ValueExpression>
+                  <Operator>NotEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="String">vm-mudassir-latif2</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="Success">
+              <Node ID="InstanceFilter.Success">
+                <Node ID="Probe">
+                  <Node ID="DS" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Failure">
+              <Node ID="InstanceFilter.Failure">
+                <Node ID="Probe">
+                  <Node ID="DS" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="Success">
+              <Node ID="InstanceFilter.Success">
+                <Node ID="Probe" />
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Failure">
+              <Node ID="InstanceFilter.Failure">
+                <Node ID="Probe" />
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="PureStorage.FlashArrays.Discovery.Controllers.PowerShell" Target="Windows!Microsoft.Windows.OperatingSystem" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Pure.FlashArrays.Arrays" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>14400</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverArrays.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId, $managedEntityId, $computerName, $arrayId)
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$api.LogScriptEvent("DiscoverArrays.ps1", 2222, 0, "Discover volumes")
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$instance = $discoveryData.CreateClassInstance("$MPElement[Name='Pure.FlashArrays.Arrays']$")
+$instance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+$instance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayId$", $arrayId)
+
+$api.LogScriptEvent("DiscoverArrays.ps1", 2223, 0, "Finish Discovery")
+
+
+$discoveryData.AddInstance($instance)
+$discoveryData
+
+]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>computerName</Name>
+              <Value>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>arrayId</Name>
+              <Value>vm-mudassir-latif2</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>300</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+    <Rules>
+      <Rule ID="PureStorage.FlashArrays.Rule.Modules.AccessArrays" Target="Pure.FlashArrays.Arrays" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>PerformanceCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
+            <IntervalSeconds>120</IntervalSeconds>
+            <TimeoutSeconds>300</TimeoutSeconds>
+          </DataSource>
+        </DataSources>
+        <ConditionDetection ID="CD" TypeID="Perf!System.Performance.DataGenericMapper">
+          <ObjectName>ArrayId</ObjectName>
+          <CounterName>ArrayId Detected</CounterName>
+          <InstanceName />
+          <Value>$Data/Property[@Name='InstanceName']$</Value>
+        </ConditionDetection>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SC!Microsoft.SystemCenter.CollectPerformanceData" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishPerformanceData" />
+        </WriteActions>
+      </Rule>
+    </Rules>
+    <Monitors>
+      <UnitMonitor ID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays" Accessibility="Public" Enabled="true" Target="Pure.FlashArrays.Arrays" ParentMonitorID="Health!System.Health.PerformanceState" Remotable="true" Priority="Normal" TypeID="Pure.FlashArrays.Monitor.AccessArrays" ConfirmDelivery="false">
+        <Category>PerformanceHealth</Category>
+        <AlertSettings AlertMessage="PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>120</IntervalSeconds>
+          <SyncTime />
+          <TimeoutSeconds>300</TimeoutSeconds>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+  </Monitoring>
+  <Presentation>
+    <Views>
+      <View ID="PureStorage.FlashArrays.View.State.Arrays" Accessibility="Internal" Target="Pure.FlashArrays.Arrays" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Pure.FlashArrays.Arrays</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="25" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>In Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>ArrayId</Name>
+            <Id>ArrayId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>HostsName</Name>
+            <Id>Hosts</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>VolumesName</Name>
+            <Id>Volumes</Id>
+          </ColumnInfo>
+        </Presentation>
+      </View>
+      <View ID="PureStorage.FlashArrays.View.Alert.Arrays" Accessibility="Internal" Target="Pure.FlashArrays.Arrays" TypeID="SC!Microsoft.SystemCenter.AlertViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+    </Views>
+    <Folders>
+      <Folder ID="PureStorage.FlashArrays.Folder" Accessibility="Public" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ElementID="PureStorage.FlashArrays.View.State.Arrays" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.State.Arrays.FolderItem" />
+      <FolderItem ElementID="PureStorage.FlashArrays.View.Alert.Arrays" Folder="PureStorage.FlashArrays.Folder" ID="PureStorage.FlashArrays.View.Alert.Arrays.FolderItem" />
+    </FolderItems>
+    <StringResources>
+      <StringResource ID="Pure.FlashArrays.StringResources.AccessArrays" />
+      <StringResource ID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Pure.FlashArrays.StringResources.AccessArrays">
+          <Name>Volumes</Name>
+          <Description>$Data/Context/Value$</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays">
+          <Name>Arrays Space Monitor</Name>
+          <Description>Monitor the space of the array</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays.AlertMessage">
+          <Name>Arrays do not have much space.</Name>
+          <Description>Arrays do not have much space.</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Monitor.Modules.AccessArrays" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Rule.Modules.AccessArrays">
+          <Name>Rules for Accessing Arrays</Name>
+          <Description>Description for the new rule</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Folder">
+          <Name>Pure Storage FlashArrays</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.View.State.Arrays">
+          <Name>Arrays</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.View.Alert.Arrays">
+          <Name>Active Alerts</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays">
+          <Name>Pure Storage FlashArrays</Name>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays">
+          <Name>Pure Storage FlashArrays</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="PureStorage.FlashArrays.Discovery.Controllers.PowerShell">
+          <Name>Discovery Controllers (PowerShell)</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>

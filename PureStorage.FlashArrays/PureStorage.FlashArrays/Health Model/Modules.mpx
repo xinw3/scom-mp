@@ -1,0 +1,163 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <ModuleTypes>
+
+      <!-- DataSource.AccessArrays-->
+      <DataSourceModuleType ID="Pure.FlashArrays.DataSource.AccessArrays" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="SyncTime" minOccurs="0" type="xsd:string" />
+          <xsd:element name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element name="TimeoutSeconds" type="xsd:integer" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int"/>
+          <OverrideableParameter ID="TimeoutSeconds" Selector="$Config/TimeoutSeconds$" ParameterType="int"/>
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime />
+              </DataSource>
+              <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+                <ComputerName>scom-xin</ComputerName>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Probe">
+                <Node ID="Schedule"/>
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      
+      <!-- Probe.AccessArrays-->
+      <ProbeActionModuleType ID="Pure.FlashArrays.Probe.AccessArrays" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="ComputerName" type="xsd:string" />
+        </Configuration>
+        
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>MonitorDemo.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1</ScriptBody>
+                <TimeoutSeconds>120</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Script" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <TriggerOnly>true</TriggerOnly>
+      </ProbeActionModuleType>
+   
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="Pure.FlashArrays.Monitor.AccessArrays" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="Success" NoDetection="false"/>
+          <MonitorTypeState ID="Failure" NoDetection="false"/>
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element name="SyncTime" type="xsd:string" />
+          <xsd:element name="TimeoutSeconds" type="xsd:string" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int"/>
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string"/>
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="Pure.FlashArrays.DataSource.AccessArrays">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <TimeoutSeconds>100</TimeoutSeconds>
+            </DataSource>
+            <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
+              <ComputerName>$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$</ComputerName>
+            </ProbeAction>
+            <ConditionDetection ID="InstanceFilter.Success" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">vm-mudassir-latif2</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+              
+            </ConditionDetection>
+            <ConditionDetection ID="InstanceFilter.Failure" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                  </ValueExpression>
+                  <Operator>NotEqual</Operator>
+                  <ValueExpression>
+                    <Value Type="String">vm-mudassir-latif2</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+              
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="Success">
+              <Node ID="InstanceFilter.Success">
+                <Node ID="Probe">
+                  <Node ID="DS" />
+                </Node>
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Failure">
+              <Node ID="InstanceFilter.Failure">
+                <Node ID="Probe">
+                  <Node ID="DS" />
+                </Node>
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+          <OnDemandDetections>
+            <OnDemandDetection MonitorTypeStateID="Success">
+              <Node ID="InstanceFilter.Success">
+                <Node ID="Probe" />
+              </Node>
+            </OnDemandDetection>
+            <OnDemandDetection MonitorTypeStateID="Failure">
+              <Node ID="InstanceFilter.Failure">
+                <Node ID="Probe" />
+              </Node>
+            </OnDemandDetection>
+          </OnDemandDetections>
+        </MonitorImplementation>
+        
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="Pure.FlashArrays.StringResources.AccessArrays"/>
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Pure.FlashArrays.StringResources.AccessArrays">
+          <Name>Volumes</Name>
+          <Description>$Data/Context/Value$</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>
