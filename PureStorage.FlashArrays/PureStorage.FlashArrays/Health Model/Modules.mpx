@@ -16,17 +16,19 @@
         <ModuleImplementation>
           <Composite>
             <MemberModules>
-              <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
+              <DataSource ID="Scheduler" TypeID="System!System.SimpleScheduler">
                 <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
                 <SyncTime />
               </DataSource>
-              <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
-                <ComputerName>scom-xin</ComputerName>
+              <ProbeAction ID="Probe" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>MonitorDemo.ps1</ScriptName>
+                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1$</ScriptBody>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
               </ProbeAction>
             </MemberModules>
             <Composition>
               <Node ID="Probe">
-                <Node ID="Schedule"/>
+                <Node ID="Scheduler"/>
               </Node>
             </Composition>
           </Composite>
@@ -34,30 +36,7 @@
         <OutputType>System!System.PropertyBagData</OutputType>
       </DataSourceModuleType>
       
-      <!-- Probe.AccessArrays-->
-      <ProbeActionModuleType ID="Pure.FlashArrays.Probe.AccessArrays" Accessibility="Internal">
-        <Configuration>
-          <xsd:element name="ComputerName" type="xsd:string" />
-        </Configuration>
-        
-        <ModuleImplementation>
-          <Composite>
-            <MemberModules>
-              <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
-                <ScriptName>MonitorDemo.ps1</ScriptName>
-                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1</ScriptBody>
-                <TimeoutSeconds>120</TimeoutSeconds>
-              </ProbeAction>
-            </MemberModules>
-            <Composition>
-              <Node ID="Script" />
-            </Composition>
-          </Composite>
-        </ModuleImplementation>
-        <OutputType>System!System.PropertyBagData</OutputType>
-        <TriggerOnly>true</TriggerOnly>
-      </ProbeActionModuleType>
-   
+
     </ModuleTypes>
     <MonitorTypes>
       <UnitMonitorType ID="Pure.FlashArrays.Monitor.AccessArrays" Accessibility="Internal">
@@ -80,14 +59,11 @@
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <TimeoutSeconds>100</TimeoutSeconds>
             </DataSource>
-            <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
-              <ComputerName>$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$</ComputerName>
-            </ProbeAction>
             <ConditionDetection ID="InstanceFilter.Success" TypeID="System!System.ExpressionFilter">
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
                   </ValueExpression>
                   <Operator>Equal</Operator>
                   <ValueExpression>
@@ -101,7 +77,7 @@
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
                   </ValueExpression>
                   <Operator>NotEqual</Operator>
                   <ValueExpression>
@@ -115,31 +91,15 @@
           <RegularDetections>
             <RegularDetection MonitorTypeStateID="Success">
               <Node ID="InstanceFilter.Success">
-                <Node ID="Probe">
                   <Node ID="DS" />
-                </Node>
               </Node>
             </RegularDetection>
             <RegularDetection MonitorTypeStateID="Failure">
               <Node ID="InstanceFilter.Failure">
-                <Node ID="Probe">
                   <Node ID="DS" />
-                </Node>
               </Node>
             </RegularDetection>
           </RegularDetections>
-          <OnDemandDetections>
-            <OnDemandDetection MonitorTypeStateID="Success">
-              <Node ID="InstanceFilter.Success">
-                <Node ID="Probe" />
-              </Node>
-            </OnDemandDetection>
-            <OnDemandDetection MonitorTypeStateID="Failure">
-              <Node ID="InstanceFilter.Failure">
-                <Node ID="Probe" />
-              </Node>
-            </OnDemandDetection>
-          </OnDemandDetections>
         </MonitorImplementation>
         
       </UnitMonitorType>

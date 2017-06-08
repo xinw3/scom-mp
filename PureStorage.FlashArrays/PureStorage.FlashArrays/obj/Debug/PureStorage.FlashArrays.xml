@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.235</Version>
+      <Version>1.0.0.243</Version>
     </Identity>
     <Name>PureStorage.FlashArrays</Name>
     <References>
@@ -34,7 +34,7 @@
       </Reference>
       <Reference Alias="Perf">
         <ID>System.Performance.Library</ID>
-        <Version>7.0.8437.0</Version>
+        <Version>7.0.8433.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
     </References>
@@ -65,44 +65,48 @@
         <ModuleImplementation>
           <Composite>
             <MemberModules>
-              <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
+              <DataSource ID="Scheduler" TypeID="System!System.SimpleScheduler">
                 <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
-                <SyncTime>$Config/SyncTime$</SyncTime>
+                <SyncTime />
               </DataSource>
-              <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
-                <ComputerName>scom-xin</ComputerName>
+              <ProbeAction ID="Probe" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
+                <ScriptName>MonitorDemo.ps1</ScriptName>
+                <ScriptBody><![CDATA[#param($arrayId, $userName, $password)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$api.LogScriptEvent("MonitorDemo.ps1", 3333, 0, "Monitor Arrays")
+
+$arrayId = "vm-mudassir-latif2"
+$userName = "pureuser"
+$password = "pureuser"
+
+$endPoint = $arrayId + ".dev.purestorage.com"
+
+$api.LogScriptEvent("MonitorDemo.ps1", 3334, 0, "$endpoints")
+
+
+
+$bag = $api.CreatePropertyBag()
+$bag.AddValue("Value", "10")
+$bag.AddValue("InstanceName", "$arrayId")
+
+$api.LogScriptEvent("MonitorArrays.ps1", 3336, 0, "Finish add value")
+
+
+#$api.Return($bag)
+$bag]]></ScriptBody>
+                <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
               </ProbeAction>
             </MemberModules>
             <Composition>
               <Node ID="Probe">
-                <Node ID="Schedule" />
+                <Node ID="Scheduler" />
               </Node>
             </Composition>
           </Composite>
         </ModuleImplementation>
         <OutputType>System!System.PropertyBagData</OutputType>
       </DataSourceModuleType>
-      <ProbeActionModuleType ID="Pure.FlashArrays.Probe.AccessArrays" Accessibility="Internal">
-        <Configuration>
-          <xsd:element name="ComputerName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
-        </Configuration>
-        <ModuleImplementation>
-          <Composite>
-            <MemberModules>
-              <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
-                <ScriptName>MonitorDemo.ps1</ScriptName>
-                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1</ScriptBody>
-                <TimeoutSeconds>120</TimeoutSeconds>
-              </ProbeAction>
-            </MemberModules>
-            <Composition>
-              <Node ID="Script" />
-            </Composition>
-          </Composite>
-        </ModuleImplementation>
-        <OutputType>System!System.PropertyBagData</OutputType>
-        <TriggerOnly>true</TriggerOnly>
-      </ProbeActionModuleType>
     </ModuleTypes>
     <MonitorTypes>
       <UnitMonitorType ID="Pure.FlashArrays.Monitor.AccessArrays" Accessibility="Internal">
@@ -125,14 +129,11 @@
               <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
               <TimeoutSeconds>100</TimeoutSeconds>
             </DataSource>
-            <ProbeAction ID="Probe" TypeID="Pure.FlashArrays.Probe.AccessArrays">
-              <ComputerName>$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$</ComputerName>
-            </ProbeAction>
             <ConditionDetection ID="InstanceFilter.Success" TypeID="System!System.ExpressionFilter">
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
                   </ValueExpression>
                   <Operator>Equal</Operator>
                   <ValueExpression>
@@ -145,7 +146,7 @@
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">Property[@Name='InstanceName']$</XPathQuery>
+                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
                   </ValueExpression>
                   <Operator>NotEqual</Operator>
                   <ValueExpression>
@@ -158,31 +159,15 @@
           <RegularDetections>
             <RegularDetection MonitorTypeStateID="Success">
               <Node ID="InstanceFilter.Success">
-                <Node ID="Probe">
-                  <Node ID="DS" />
-                </Node>
+                <Node ID="DS" />
               </Node>
             </RegularDetection>
             <RegularDetection MonitorTypeStateID="Failure">
               <Node ID="InstanceFilter.Failure">
-                <Node ID="Probe">
-                  <Node ID="DS" />
-                </Node>
+                <Node ID="DS" />
               </Node>
             </RegularDetection>
           </RegularDetections>
-          <OnDemandDetections>
-            <OnDemandDetection MonitorTypeStateID="Success">
-              <Node ID="InstanceFilter.Success">
-                <Node ID="Probe" />
-              </Node>
-            </OnDemandDetection>
-            <OnDemandDetection MonitorTypeStateID="Failure">
-              <Node ID="InstanceFilter.Failure">
-                <Node ID="Probe" />
-              </Node>
-            </OnDemandDetection>
-          </OnDemandDetections>
         </MonitorImplementation>
       </UnitMonitorType>
     </MonitorTypes>

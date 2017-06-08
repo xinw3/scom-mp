@@ -57,7 +57,9 @@
       <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="System.Health.Library">
+      <HintPath>C:\Program Files (x86)\System Center Management Packs\System.Health.Library.mp</HintPath>
       <Alias>Health</Alias>
+      <MinVersion>7.0.8433.0</MinVersion>
       <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
     <ManagementPackReference Include="System.Library">
@@ -71,7 +73,7 @@
     <ManagementPackReference Include="System.Performance.Library">
       <HintPath>C:\Program Files (x86)\System Center Management Packs\System.Performance.Library.mp</HintPath>
       <Alias>Perf</Alias>
-      <MinVersion>7.0.8437.0</MinVersion>
+      <MinVersion>7.0.8433.0</MinVersion>
       <PackageToBundle>False</PackageToBundle>
     </ManagementPackReference>
   </ItemGroup>
