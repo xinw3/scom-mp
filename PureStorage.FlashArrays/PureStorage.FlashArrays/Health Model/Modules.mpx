@@ -63,7 +63,7 @@
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
+                    <Value Type="String">$Data/Property[@Name='InstanceName']$</Value>
                   </ValueExpression>
                   <Operator>Equal</Operator>
                   <ValueExpression>
@@ -77,7 +77,7 @@
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
+                    <Value Type="String">$Data/Property[@Name='InstanceName']$</Value>
                   </ValueExpression>
                   <Operator>NotEqual</Operator>
                   <ValueExpression>

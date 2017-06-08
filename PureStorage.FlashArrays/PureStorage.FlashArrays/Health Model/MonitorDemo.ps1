@@ -9,7 +9,7 @@ $password = "pureuser"
 
 $endPoint = $arrayId + ".dev.purestorage.com"
 
-$api.LogScriptEvent("MonitorDemo.ps1", 3334, 0, "$endpoints")
+$api.LogScriptEvent("MonitorDemo.ps1", 3334, 0, "$endpoint")
 
 
 

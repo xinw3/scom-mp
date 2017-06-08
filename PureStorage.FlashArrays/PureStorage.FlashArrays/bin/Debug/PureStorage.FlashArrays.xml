@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.243</Version>
+      <Version>1.0.0.244</Version>
     </Identity>
     <Name>PureStorage.FlashArrays</Name>
     <References>
@@ -133,7 +133,7 @@ $bag]]></ScriptBody>
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
+                    <Value Type="String">$Data/Property[@Name='InstanceName']$</Value>
                   </ValueExpression>
                   <Operator>Equal</Operator>
                   <ValueExpression>
@@ -146,7 +146,7 @@ $bag]]></ScriptBody>
               <Expression>
                 <SimpleExpression>
                   <ValueExpression>
-                    <XPathQuery Type="String">$Data/Property[@Name='InstanceName']$</XPathQuery>
+                    <Value Type="String">$Data/Property[@Name='InstanceName']$</Value>
                   </ValueExpression>
                   <Operator>NotEqual</Operator>
                   <ValueExpression>
