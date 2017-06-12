@@ -70,8 +70,7 @@
                     <Value Type="String">vm-mudassir-latif2</Value>
                   </ValueExpression>
                 </SimpleExpression>
-              </Expression>
-              
+              </Expression>             
             </ConditionDetection>
             <ConditionDetection ID="InstanceFilter.Failure" TypeID="System!System.ExpressionFilter">
               <Expression>
@@ -84,8 +83,7 @@
                     <Value Type="String">vm-mudassir-latif2</Value>
                   </ValueExpression>
                 </SimpleExpression>
-              </Expression>
-              
+              </Expression>             
             </ConditionDetection>
           </MemberModules>
           <RegularDetections>

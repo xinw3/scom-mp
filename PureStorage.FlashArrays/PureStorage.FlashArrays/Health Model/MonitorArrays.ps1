@@ -19,5 +19,5 @@ $bag.AddValue('ArrayId', $array)
 
 $api.LogScriptEvent("MonitorArrays.ps1", 3336, 0, "volumes $volumes")
 
-$api.Return($bag)
-#$bag
+#$api.Return($bag)
+$bag
