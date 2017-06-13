@@ -32,7 +32,6 @@ if ($computerName -eq "scom-xin.xin.com") {
 
     $api.LogScriptEvent("DiscoverHosts.ps1", 2246, 0, "Finish Discovery")
     $discoveryData.AddInstance($hostsInstance)
-    Disconnect-PfaArray -Array $array
     
 } else {
     $api.LogScriptEvent("DiscoverArrays.ps1", 2240, 0, "Wrong Name: $computerName")

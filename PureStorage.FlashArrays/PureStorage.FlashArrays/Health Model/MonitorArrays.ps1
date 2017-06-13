@@ -27,9 +27,14 @@ if ($computerName -eq "scom-xin.xin.com") {
     ### volumeIOMetrics: name, time, writes_persec, reads_per_sec (bandwidth); input_per_sec, output_per_sec (IOPS); usec_per_write_op, usec_per_read_op (latency);
     $volumeIOMetrics = Get-PfaVolumeIOMetrics -Array $array -VolumeName $volume.name -TimeRange 1h
     
-
     ### allVolumeSpaceMetrics: total, name, system, snapshots, volumes, data_reduction, size, shared_space, thin_provisioning, total_reduction
     $allVolumeSpaceMetrics = Get-PfaAllVolumeSpaceMetrics -Array $array
+
+    ### allHostSpaceMetrics: total, name, snapshots, volumes, data_reduction, size, thin_provisioning, total_reduction
+    $allHostSpaceMetrics = Get-PfaAllHostSpaceMetrics -Array $array
+    
+    ### hostSpaceMetrics: total, name, snapshots, volumes, data_reduction, size, thin_provisioning, total_reduction
+    $hostSpaceMetrics = Get-PfaHostSpaceMetrics -Array $array -Name TestTaskHost
 
     $bag.AddValue('IOMetrics', $ioMetrics)
     $bag.AddValue('SpaceMetrics', $spaceMetrics)

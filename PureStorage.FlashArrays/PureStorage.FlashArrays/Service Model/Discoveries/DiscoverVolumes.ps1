@@ -34,7 +34,6 @@ if ($computerName -eq "scom-xin.xin.com") {
 
     $api.LogScriptEvent("DiscoverVolumes.ps1", 2235, 0, "Finish Discovery $apiVersion")
     $discoveryData.AddInstance($volumesInstance)
-    Disconnect-PfaArray -Array $array
     
 } else {
     $api.LogScriptEvent("DiscoverVolumes.ps1", 2230, 0, "Wrong Name: $computerName")

@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.275</Version>
+      <Version>1.0.0.278</Version>
     </Identity>
     <Name>PureStorage.FlashArrays</Name>
     <References>
@@ -247,7 +247,6 @@ if ($computerName -eq "scom-xin.xin.com") {
 
     $api.LogScriptEvent("DiscoverHosts.ps1", 2246, 0, "Finish Discovery")
     $discoveryData.AddInstance($hostsInstance)
-    Disconnect-PfaArray -Array $array
     
 } else {
     $api.LogScriptEvent("DiscoverArrays.ps1", 2240, 0, "Wrong Name: $computerName")
