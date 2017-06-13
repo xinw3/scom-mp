@@ -95,7 +95,13 @@
     <Compile Include="Project.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service Model\Classes\NewArrays.mpx">
+    <Compile Include="Service Model\Classes\Arrays.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Service Model\Classes\Hosts.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Service Model\Classes\Volumes.mpx">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Service Model\Discoveries\Discoveries.mptg.mpx">
@@ -127,8 +133,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Health Model\MonitorArrays.ps1" />
     <EmbeddedResource Include="Health Model\MonitorDemo.ps1" />
+    <EmbeddedResource Include="Health Model\MonitorVolumes.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\Demo.ps1" />
     <EmbeddedResource Include="Service Model\Discoveries\DiscoverArrays.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverHosts.ps1" />
+    <EmbeddedResource Include="Service Model\Discoveries\DiscoverVolumes.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
 </Project>

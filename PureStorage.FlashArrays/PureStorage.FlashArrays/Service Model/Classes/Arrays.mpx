@@ -1,0 +1,50 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Pure.FlashArrays.Arrays" Base="Windows!Microsoft.Windows.LocalApplication" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false" >
+          <Property ID="Version" Key="false" Type="string"/>
+          <Property ID="ArrayName" Key="true" Type="string" />
+          <Property ID="UserName" Key="false" Type="string" />
+          <Property ID="ApiVersion" Key="false" Type="string" />
+          <Property ID="ApiToken" Key="false" Type="string" />
+          <Property ID="Role" Key="false" Type="string" />
+        </ClassType>
+      </ClassTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays">
+          <Name>Pure Storage Flash Arrays</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays" SubElementID="Version">
+          <Name>Array Version</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays" SubElementID="ArrayName">
+          <Name>Array Name</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays" SubElementID="UserName">
+          <Name>User Name</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays" SubElementID="ApiVersion">
+          <Name>ApiVersion</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays" SubElementID="ApiToken">
+          <Name>ApiToken</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Arrays" SubElementID="Role">
+          <Name>Role</Name>
+          <Description></Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

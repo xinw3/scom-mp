@@ -12,9 +12,6 @@ if ($computerName -eq "SCOM-XIN") {
     $endPoint = $arrayId + ".dev.purestorage.com"
 
     $api.LogScriptEvent("MonitorDemo.ps1", 3334, 0, "$endpoint")
-
-
-
     $bag = $api.CreatePropertyBag()
     $bag.AddValue("Value", "10")
     $bag.AddValue("InstanceName", "$arrayId")

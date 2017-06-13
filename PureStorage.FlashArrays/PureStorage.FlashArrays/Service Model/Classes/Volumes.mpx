@@ -1,0 +1,52 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Pure.FlashArrays.Volumes" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+
+          <Property ID="Name" Key="true" Type="string"/>
+          <Property ID="Serial" Key="false" Type="string" />
+          <Property ID="DateCreated" Key="false" Type="string" />
+          <Property ID="Size" Key="false" Type="string" />
+        </ClassType>
+      
+      </ClassTypes>
+    <RelationshipTypes>
+      <RelationshipType ID="Pure.FlashArrays.ArraysHostVolumes" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+        <Source ID="Source" Type="Pure.FlashArrays.Arrays"/>
+        <Target ID="Target" Type="Pure.FlashArrays.Volumes"/>
+      </RelationshipType>
+    </RelationshipTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <DisplayString ElementID="Pure.FlashArrays.Volumes">
+          <Name>Pure Storage FlashArrays Volumes</Name>
+          <Description>Pure Storage FlashArrays Volumes Class</Description>
+        </DisplayString>
+
+       
+        <DisplayString ElementID="Pure.FlashArrays.Volumes" SubElementID="Name">
+          <Name>Volume Name</Name>
+          <Description></Description>
+        </DisplayString>     
+        <DisplayString ElementID="Pure.FlashArrays.Volumes" SubElementID="Serial">
+          <Name>Volume Serial</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Volumes" SubElementID="DateCreated">
+          <Name>Volume Created Date</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="Pure.FlashArrays.Volumes" SubElementID="Size">
+          <Name>Volume Size</Name>
+          <Description></Description>
+        </DisplayString>
+      
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

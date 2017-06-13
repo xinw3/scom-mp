@@ -1,7 +1,13 @@
-Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.Arrays*5*10*ClassType
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*5*10*ClassType
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.Hosts*5*10*ClassType
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.Volumes*5*10*ClassType
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.ArraysHostHosts*15*10*RelationshipType
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.ArraysHostVolumes*15*8*RelationshipType
 Health Model\Modules.mpx*Pure.FlashArrays.DataSource.AccessArrays*6*8*DataSourceModuleType
 Health Model\Modules.mpx*Pure.FlashArrays.Monitor.AccessArrays*42*8*UnitMonitorType
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Controllers.PowerShell*6*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Hosts*6*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Volumes*51*8*Discovery
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Arrays*96*8*Discovery
 Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Rule.Modules.AccessArrays*6*8*Rule
 Health Model\NewMonitors.mptg.mpx*PureStorage.FlashArrays.Monitor.Modules.AccessArrays*27*8*UnitMonitor
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays*6*8*View
@@ -21,5 +27,23 @@ Presentation\Folders.mpx*PureStorage.FlashArrays.Folder*14*10*DisplayString
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.State.Arrays*43*10*DisplayString
 Presentation\Views.mptg.mpx*PureStorage.FlashArrays.View.Alert.Arrays*47*10*DisplayString
 Project.mpx*PureStorage.FlashArrays*5*10*DisplayString
-Service Model\Classes\NewArrays.mpx*Pure.FlashArrays.Arrays*18*10*DisplayString
-Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Discovery.Controllers.PowerShell*42*10*DisplayString
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*19*10*DisplayString
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*23*10*DisplayString*SubElementID*Version
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*27*10*DisplayString*SubElementID*ArrayName
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*31*10*DisplayString*SubElementID*UserName
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*35*10*DisplayString*SubElementID*ApiVersion
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*39*10*DisplayString*SubElementID*ApiToken
+Service Model\Classes\Arrays.mpx*Pure.FlashArrays.Arrays*43*10*DisplayString*SubElementID*Role
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.Hosts*25*10*DisplayString
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.Hosts*29*10*DisplayString*SubElementID*Name
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.Hosts*33*10*DisplayString*SubElementID*IQN
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.Hosts*37*10*DisplayString*SubElementID*WWN
+Service Model\Classes\Hosts.mpx*Pure.FlashArrays.Hosts*41*10*DisplayString*SubElementID*HostGroup
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.Volumes*26*10*DisplayString
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.Volumes*32*10*DisplayString*SubElementID*Name
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.Volumes*36*10*DisplayString*SubElementID*Serial
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.Volumes*40*10*DisplayString*SubElementID*DateCreated
+Service Model\Classes\Volumes.mpx*Pure.FlashArrays.Volumes*44*10*DisplayString*SubElementID*Size
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Hosts*140*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Volumes*144*10*DisplayString
+Service Model\Discoveries\Discoveries.mptg.mpx*PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Arrays*148*10*DisplayString
