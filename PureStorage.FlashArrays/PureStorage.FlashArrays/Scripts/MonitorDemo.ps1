@@ -16,7 +16,7 @@ if ($computerName -eq "SCOM-XIN") {
     $bag.AddValue("Value", "10")
     $bag.AddValue("InstanceName", "$arrayId")
 
-    $api.LogScriptEvent("MonitorArrays.ps1", 3336, 0, "Finish add value")
+    $api.LogScriptEvent("MonitorDemo.ps1", 3336, 0, "Finish add value")
     #$api.Return($bag)
     
 } else {

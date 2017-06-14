@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.292</Version>
+      <Version>1.0.0.296</Version>
     </Identity>
     <Name>Pure Storage FlashArrays Management Pack</Name>
     <References>
@@ -74,9 +74,6 @@
         </RelationshipType>
       </RelationshipTypes>
     </EntityTypes>
-    <SecureReferences>
-      <SecureReference ID="Pure.FlashArrays.AdminAccount" Accessibility="Public" Context="Pure.FlashArrays.Arrays" />
-    </SecureReferences>
     <ModuleTypes>
       <DataSourceModuleType ID="Pure.FlashArrays.DataSource.AccessArrays" Accessibility="Internal">
         <Configuration>
@@ -115,7 +112,7 @@ if ($computerName -eq "SCOM-XIN") {
     $bag.AddValue("Value", "10")
     $bag.AddValue("InstanceName", "$arrayId")
 
-    $api.LogScriptEvent("MonitorArrays.ps1", 3336, 0, "Finish add value")
+    $api.LogScriptEvent("MonitorDemo.ps1", 3336, 0, "Finish add value")
     #$api.Return($bag)
     
 } else {

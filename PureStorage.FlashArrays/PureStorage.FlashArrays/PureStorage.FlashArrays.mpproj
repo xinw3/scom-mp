@@ -85,9 +85,6 @@
       <SubType>Code</SubType>
       <DependentUpon>Health Model\NewMonitors.mptg</DependentUpon>
     </Compile>
-    <Compile Include="Health Model\RunAsAccount.mpx">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Presentation\Folders.mpx">
       <SubType>Code</SubType>
     </Compile>
