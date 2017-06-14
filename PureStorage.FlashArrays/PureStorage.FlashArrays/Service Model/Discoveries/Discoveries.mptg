@@ -1,104 +1,12 @@
 <TemplateGroup>
   <Instances>
-    <Instance ID="Instance53a2ea9a3a9a45ee8a838f0d5f97c9ad" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
-      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <Id>Pure.FlashArrays.Discovery.Hosts</Id>
-        <DisplayName>Discover Hosts</DisplayName>
-        <Description>Discover Hosts</Description>
-        <DataSourceId>DS</DataSourceId>
-        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverHosts.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverHosts.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
-        <DataSourceRunAs />
-        <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
-        <Target>Pure.FlashArrays.Arrays</Target>
-        <Enabled>true</Enabled>
-        <Remotable>true</Remotable>
-        <Priority>Normal</Priority>
-        <ConfirmDelivery>false</ConfirmDelivery>
-        <Category>Discovery</Category>
-        <DiscoveryClasses>
-          <DiscoveryClassItem>
-            <TypeId>Pure.FlashArrays.Hosts</TypeId>
-            <Properties>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Hosts</TypeId>
-                <Property>Name</Property>
-              </DiscoveredTypeProperty>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Hosts</TypeId>
-                <Property>IQN</Property>
-              </DiscoveredTypeProperty>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Hosts</TypeId>
-                <Property>WWN</Property>
-              </DiscoveredTypeProperty>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Hosts</TypeId>
-                <Property>HostGroup</Property>
-              </DiscoveredTypeProperty>
-            </Properties>
-          </DiscoveryClassItem>
-        </DiscoveryClasses>
-        <DiscoveryRelationships>
-          <DiscoveryRelationshipItem>
-            <TypeId>Pure.FlashArrays.ArraysHostHosts</TypeId>
-            <Properties />
-          </DiscoveryRelationshipItem>
-        </DiscoveryRelationships>
-      </DiscoveryConfig>
-    </Instance>
-    <Instance ID="Instance357cbbbf2a014c61a5229906e2ce49a8" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
-      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <Id>Pure.FlashArrays.Discovery.Volumes</Id>
-        <DisplayName>Discover Volumes</DisplayName>
-        <Description>Description for the new discovery.</Description>
-        <DataSourceId>DS</DataSourceId>
-        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverVolumes.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverVolumes.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
-        <DataSourceRunAs />
-        <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
-        <Target>Pure.FlashArrays.Arrays</Target>
-        <Enabled>true</Enabled>
-        <Remotable>true</Remotable>
-        <Priority>Normal</Priority>
-        <ConfirmDelivery>false</ConfirmDelivery>
-        <Category>Discovery</Category>
-        <DiscoveryClasses>
-          <DiscoveryClassItem>
-            <TypeId>Pure.FlashArrays.Volumes</TypeId>
-            <Properties>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Volumes</TypeId>
-                <Property>Name</Property>
-              </DiscoveredTypeProperty>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Volumes</TypeId>
-                <Property>Serial</Property>
-              </DiscoveredTypeProperty>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Volumes</TypeId>
-                <Property>DateCreated</Property>
-              </DiscoveredTypeProperty>
-              <DiscoveredTypeProperty>
-                <TypeId>Pure.FlashArrays.Volumes</TypeId>
-                <Property>Size</Property>
-              </DiscoveredTypeProperty>
-            </Properties>
-          </DiscoveryClassItem>
-        </DiscoveryClasses>
-        <DiscoveryRelationships>
-          <DiscoveryRelationshipItem>
-            <TypeId>Pure.FlashArrays.ArraysHostVolumes</TypeId>
-            <Properties />
-          </DiscoveryRelationshipItem>
-        </DiscoveryRelationships>
-      </DiscoveryConfig>
-    </Instance>
     <Instance ID="Instancebbf213d1d52948ae81bfdaf7e75fd906" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
       <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
         <Id>Pure.FlashArrays.Discovery.Arrays</Id>
         <DisplayName>Discover Arrays</DisplayName>
         <Description>Description for the new discovery.</Description>
         <DataSourceId>DS</DataSourceId>
-        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverArrays.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverArrays.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;120&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverArrays.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverArrays.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;scom-xin&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;120&lt;/TimeoutSeconds&gt;</DataSourceConfig>
         <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
         <Target>Windows!Microsoft.Windows.Server.OperatingSystem</Target>
         <Enabled>true</Enabled>

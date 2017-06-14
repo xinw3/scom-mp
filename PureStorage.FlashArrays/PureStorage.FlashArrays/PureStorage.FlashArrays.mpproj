@@ -98,12 +98,6 @@
     <Compile Include="Service Model\Classes\Arrays.mpx">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Service Model\Classes\Hosts.mpx">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Service Model\Classes\Volumes.mpx">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Service Model\Discoveries\Discoveries.mptg.mpx">
       <SubType>Code</SubType>
     </Compile>

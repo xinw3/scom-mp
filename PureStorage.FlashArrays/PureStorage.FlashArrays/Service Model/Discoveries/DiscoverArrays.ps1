@@ -21,6 +21,7 @@ if ($computerName -eq "scom-xin") {
     ### apiToken
     $apiToken = Get-PfaApiToken -Array $array -User $userName
 
+    $arraysInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Version$", $version)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayName$", $arrayName)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/UserName$", $userName)
@@ -28,7 +29,6 @@ if ($computerName -eq "scom-xin") {
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ApiToken$", $apiToken)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Role$", $role)
 
-    $api.LogScriptEvent("DiscoverArrays.ps1", 2223, 0, "$arrayName $version $userName $apiVersion $apiToken $role")
     $api.LogScriptEvent("DiscoverArrays.ps1", 2224, 0, "Finish Discovery $apiVersion")
     $discoveryData.AddInstance($volumesInstance)
     Disconnect-PfaArray -Array $array
@@ -36,5 +36,4 @@ if ($computerName -eq "scom-xin") {
 } else {
     $api.LogScriptEvent("DiscoverArrays.ps1", 2220, 0, "Wrong Name: $computerName")
 }
-$api.LogScriptEvent("DiscoverArrays.ps1", 2221, 0, "Return Discovery Data")
 $discoveryData
