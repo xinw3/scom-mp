@@ -1,10 +1,11 @@
 param($computerName, $arrayName, $userName, $password)
+$scriptName = "MonitorArrays.ps1"
 $api = New-Object -ComObject 'MOM.ScriptAPI'
 $bag = $api.CreatePropertyBag()
 if ($computerName -eq "scom-xin.xin.com") {
     
     $endPoint = $arrayName + ".dev.purestorage.com"
-    $api.LogScriptEvent("MonitorArrays.ps1", 3333, 0, "Monitor Arrays $endPoint")
+    $api.LogScriptEvent($scriptName, 3333, 0, "Monitor Arrays $endPoint")
    
     $securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
 
@@ -36,13 +37,17 @@ if ($computerName -eq "scom-xin.xin.com") {
     ### hostSpaceMetrics: total, name, snapshots, volumes, data_reduction, size, thin_provisioning, total_reduction
     $hostSpaceMetrics = Get-PfaHostSpaceMetrics -Array $array -Name TestTaskHost
 
-    $bag.AddValue('IOMetrics', $ioMetrics)
-    $bag.AddValue('SpaceMetrics', $spaceMetrics)
+    $bag.AddValue('ArrayIOMetrics', $arrayIOMetrics)
+    $bag.AddValue('ArraySpaceMetrics', $arraySpaceMetrics)
+    $bag.AddValue('AllVolumeIOMetrics', $allVolumeIOMetrics)
+    $bag.AddValue('VolumeIOMetrics', $volumeIOMetrics)
+    $bag.AddValue('AllHostSpaceMetrics', $allHostSpaceMetrics)
+    $bag.AddValue('HostSpaceMetrics', $hostSpaceMetrics)
 
-    $api.LogScriptEvent("DiscoverArrays.ps1", 2223, 0, "Finish Discovery $apiVersion")
+    $api.LogScriptEvent($scriptName, 2223, 0, "Finish Discovery $apiVersion")
     Disconnect-PfaArray -Array $array
     
 } else {
-    $api.LogScriptEvent("DiscoverArrays.ps1", 2220, 0, "Wrong Name: $computerName")
+    $api.LogScriptEvent($scriptName, 2220, 0, "Wrong Name: $computerName")
 }
 $bag

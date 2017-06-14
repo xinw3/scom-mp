@@ -22,7 +22,7 @@
               </DataSource>
               <ProbeAction ID="Probe" TypeID="Windows!Microsoft.Windows.PowerShellPropertyBagTriggerOnlyProbe">
                 <ScriptName>MonitorDemo.ps1</ScriptName>
-                <ScriptBody>$IncludeFileContent/Health Model/MonitorDemo.ps1$</ScriptBody>
+                <ScriptBody>$IncludeFileContent/Scripts/MonitorDemo.ps1$</ScriptBody>
                 <TimeoutSeconds>$Config/TimeoutSeconds$</TimeoutSeconds>
               </ProbeAction>
             </MemberModules>

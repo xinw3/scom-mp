@@ -5,8 +5,9 @@
         <Id>Pure.FlashArrays.Discovery.Hosts</Id>
         <DisplayName>Discover Hosts</DisplayName>
         <Description>Discover Hosts</Description>
-        <DataSourceId>DS.Hosts</DataSourceId>
-        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverHosts.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/Discoveries/DiscoverHosts.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverHosts.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverHosts.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceRunAs />
         <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
         <Target>Pure.FlashArrays.Arrays</Target>
         <Enabled>true</Enabled>
@@ -50,8 +51,9 @@
         <Id>Pure.FlashArrays.Discovery.Volumes</Id>
         <DisplayName>Discover Volumes</DisplayName>
         <Description>Description for the new discovery.</Description>
-        <DataSourceId>DS.Volumes</DataSourceId>
-        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverVolumes.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/DiscoverVolumes.ps1&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverVolumes.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverVolumes.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceRunAs />
         <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
         <Target>Pure.FlashArrays.Arrays</Target>
         <Enabled>true</Enabled>
@@ -90,13 +92,13 @@
         </DiscoveryRelationships>
       </DiscoveryConfig>
     </Instance>
-    <Instance ID="Instance481c520fba684768800e0d622e0699dd" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+    <Instance ID="Instancebbf213d1d52948ae81bfdaf7e75fd906" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
       <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
         <Id>Pure.FlashArrays.Discovery.Arrays</Id>
         <DisplayName>Discover Arrays</DisplayName>
-        <Description>Discover Arrays</Description>
-        <DataSourceId>DS.Arrays</DataSourceId>
-        <DataSourceConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverArrays.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Service Model/Discoveries/DiscoverArrays.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;300&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <Description>Description for the new discovery.</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;14400&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;ScriptName&gt;DiscoverArrays.ps1&lt;/ScriptName&gt;&lt;ScriptBody&gt;$IncludeFileContent/Scripts/DiscoverArrays.ps1$&lt;/ScriptBody&gt;&lt;Parameters&gt;&lt;Parameter&gt;&lt;Name&gt;sourceId&lt;/Name&gt;&lt;Value&gt;$MPElement$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;managedEntityId&lt;/Name&gt;&lt;Value&gt;$Target/Id$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;computerName&lt;/Name&gt;&lt;Value&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;arrayName&lt;/Name&gt;&lt;Value&gt;vm-mudassir-latif2&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;userName&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;Parameter&gt;&lt;Name&gt;password&lt;/Name&gt;&lt;Value&gt;pureuser&lt;/Value&gt;&lt;/Parameter&gt;&lt;/Parameters&gt;&lt;TimeoutSeconds&gt;120&lt;/TimeoutSeconds&gt;</DataSourceConfig>
         <DataSourceType>Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider</DataSourceType>
         <Target>Windows!Microsoft.Windows.Server.OperatingSystem</Target>
         <Enabled>true</Enabled>
@@ -107,7 +109,32 @@
         <DiscoveryClasses>
           <DiscoveryClassItem>
             <TypeId>Pure.FlashArrays.Arrays</TypeId>
-            <Properties />
+            <Properties>
+              <DiscoveredTypeProperty>
+                <TypeId>Pure.FlashArrays.Arrays</TypeId>
+                <Property>Version</Property>
+              </DiscoveredTypeProperty>
+              <DiscoveredTypeProperty>
+                <TypeId>Pure.FlashArrays.Arrays</TypeId>
+                <Property>ArrayName</Property>
+              </DiscoveredTypeProperty>
+              <DiscoveredTypeProperty>
+                <TypeId>Pure.FlashArrays.Arrays</TypeId>
+                <Property>UserName</Property>
+              </DiscoveredTypeProperty>
+              <DiscoveredTypeProperty>
+                <TypeId>Pure.FlashArrays.Arrays</TypeId>
+                <Property>ApiVersion</Property>
+              </DiscoveredTypeProperty>
+              <DiscoveredTypeProperty>
+                <TypeId>Pure.FlashArrays.Arrays</TypeId>
+                <Property>ApiToken</Property>
+              </DiscoveredTypeProperty>
+              <DiscoveredTypeProperty>
+                <TypeId>Pure.FlashArrays.Arrays</TypeId>
+                <Property>Role</Property>
+              </DiscoveredTypeProperty>
+            </Properties>
           </DiscoveryClassItem>
         </DiscoveryClasses>
         <DiscoveryRelationships />

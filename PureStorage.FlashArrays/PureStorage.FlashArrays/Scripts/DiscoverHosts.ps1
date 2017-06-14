@@ -2,7 +2,7 @@ param($sourceId, $managedEntityId, $computerName, $arrayName, $userName, $passwo
 $api = New-Object -ComObject 'MOM.ScriptAPI'
 $discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
 if ($computerName -eq "scom-xin.xin.com") {
-    $api.LogScriptEvent("DiscoverHosts.ps1", 2244, 0, "Discover arrays $arrayId")
+    $api.LogScriptEvent("DiscoverHosts.ps1", 2244, 0, "Discover arrays $arrayName")
 
     $endPoint = $arrayName + ".dev.purestorage.com"
     $securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
@@ -23,11 +23,12 @@ if ($computerName -eq "scom-xin.xin.com") {
         $hgroup = $singleHost.hgroup
 
         $hostsInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+        $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayName$", $arrayName)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/Name$", $name)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/IQN$", $iqn)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/WWN$", $wwn)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/HostGroup$", $hgroup)
-        $api.LogScriptEvent("DiscoverArrays.ps1", 2245, 0, $name + $iqn + $wwn + $hgroup)
+        $api.LogScriptEvent("DiscoverHosts.ps1", 2245, 0, $name + $iqn + $wwn + $hgroup)
     }
 
     $api.LogScriptEvent("DiscoverHosts.ps1", 2246, 0, "Finish Discovery")

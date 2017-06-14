@@ -2,7 +2,7 @@ param($sourceId, $managedEntityId, $computerName, $arrayName, $userName, $passwo
 $api = New-Object -ComObject 'MOM.ScriptAPI'
 $discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
 if ($computerName -eq "scom-xin.xin.com") {
-    $api.LogScriptEvent("DiscoverVolumes.ps1", 2233, 0, "Discover arrays $arrayId")
+    $api.LogScriptEvent("DiscoverVolumes.ps1", 2233, 0, "Discover arrays $arrayName")
 
     $endPoint = $arrayName + ".dev.purestorage.com"
     $securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
@@ -25,6 +25,7 @@ if ($computerName -eq "scom-xin.xin.com") {
         $size = $volume.size
 
         $volumesInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+        $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayName$", $arrayName)
         $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/Name$", $name)
         $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/Serial$", $serial)
         $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/DateCreated$", $created)

@@ -3,9 +3,9 @@
   <Manifest>
     <Identity>
       <ID>PureStorage.FlashArrays</ID>
-      <Version>1.0.0.278</Version>
+      <Version>1.0.0.292</Version>
     </Identity>
-    <Name>PureStorage.FlashArrays</Name>
+    <Name>Pure Storage FlashArrays Management Pack</Name>
     <References>
       <Reference Alias="SCDW">
         <ID>Microsoft.SystemCenter.DataWarehouse.Library</ID>
@@ -74,6 +74,9 @@
         </RelationshipType>
       </RelationshipTypes>
     </EntityTypes>
+    <SecureReferences>
+      <SecureReference ID="Pure.FlashArrays.AdminAccount" Accessibility="Public" Context="Pure.FlashArrays.Arrays" />
+    </SecureReferences>
     <ModuleTypes>
       <DataSourceModuleType ID="Pure.FlashArrays.DataSource.AccessArrays" Accessibility="Internal">
         <Configuration>
@@ -209,7 +212,7 @@ $bag]]></ScriptBody>
           </DiscoveryClass>
           <DiscoveryRelationship TypeID="Pure.FlashArrays.ArraysHostHosts" />
         </DiscoveryTypes>
-        <DataSource ID="DS.Hosts" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
           <IntervalSeconds>300</IntervalSeconds>
           <SyncTime />
           <ScriptName>DiscoverHosts.ps1</ScriptName>
@@ -217,7 +220,7 @@ $bag]]></ScriptBody>
 $api = New-Object -ComObject 'MOM.ScriptAPI'
 $discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
 if ($computerName -eq "scom-xin.xin.com") {
-    $api.LogScriptEvent("DiscoverHosts.ps1", 2244, 0, "Discover arrays $arrayId")
+    $api.LogScriptEvent("DiscoverHosts.ps1", 2244, 0, "Discover arrays $arrayName")
 
     $endPoint = $arrayName + ".dev.purestorage.com"
     $securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
@@ -238,11 +241,12 @@ if ($computerName -eq "scom-xin.xin.com") {
         $hgroup = $singleHost.hgroup
 
         $hostsInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+        $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayName$", $arrayName)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/Name$", $name)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/IQN$", $iqn)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/WWN$", $wwn)
         $hostsInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Hosts']/HostGroup$", $hgroup)
-        $api.LogScriptEvent("DiscoverArrays.ps1", 2245, 0, $name + $iqn + $wwn + $hgroup)
+        $api.LogScriptEvent("DiscoverHosts.ps1", 2245, 0, $name + $iqn + $wwn + $hgroup)
     }
 
     $api.LogScriptEvent("DiscoverHosts.ps1", 2246, 0, "Finish Discovery")
@@ -293,11 +297,53 @@ $discoveryData
           </DiscoveryClass>
           <DiscoveryRelationship TypeID="Pure.FlashArrays.ArraysHostVolumes" />
         </DiscoveryTypes>
-        <DataSource ID="DS.Volumes" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
           <IntervalSeconds>300</IntervalSeconds>
           <SyncTime />
           <ScriptName>DiscoverVolumes.ps1</ScriptName>
-          <ScriptBody>$IncludeFileContent/Service Model/DiscoverVolumes.ps1</ScriptBody>
+          <ScriptBody><![CDATA[param($sourceId, $managedEntityId, $computerName, $arrayName, $userName, $password)
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+if ($computerName -eq "scom-xin.xin.com") {
+    $api.LogScriptEvent("DiscoverVolumes.ps1", 2233, 0, "Discover arrays $arrayName")
+
+    $endPoint = $arrayName + ".dev.purestorage.com"
+    $securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
+
+    ### array: Disposed, EndPoint, UserName, ApiVersion, Role
+    $array = New-PfaArray -EndPoint $endPoint -UserName $userName -Password $securePassword -IgnoreCertificateError
+    $apiVersion = $array.ApiVersion
+
+
+
+    ######  Discover Volumes ######
+    $volumesInstance = $discoveryData.CreateClassInstance("$MPElement[Name='Pure.FlashArrays.Volumes']$")
+    $volumes = Get-PfaVolumes -Array $array
+    ### volume: serial, created, name, size
+    # $volume = $volumes[0]
+    foreach ($volume in $volumes) {
+        $name = $volume.name
+        $serial = $volume.serial
+        $created = $volume.created
+        $size = $volume.size
+
+        $volumesInstance.AddProperty("$MPElement[Name='Windows!Microsoft.Windows.Computer']/PrincipalName$", $computerName)
+        $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ArrayName$", $arrayName)
+        $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/Name$", $name)
+        $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/Serial$", $serial)
+        $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/DateCreated$", $created)
+        $volumesInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Volumes']/Size$", $size)
+        $api.LogScriptEvent("DiscoverVolumes.ps1", 2234, 0, ($name + $serial + $created + $size))
+    }
+
+    $api.LogScriptEvent("DiscoverVolumes.ps1", 2235, 0, "Finish Discovery $apiVersion")
+    $discoveryData.AddInstance($volumesInstance)
+    
+} else {
+    $api.LogScriptEvent("DiscoverVolumes.ps1", 2230, 0, "Wrong Name: $computerName")
+}
+$discoveryData
+]]></ScriptBody>
           <Parameters>
             <Parameter>
               <Name>sourceId</Name>
@@ -330,10 +376,17 @@ $discoveryData
       <Discovery ID="PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Arrays" Target="Windows!Microsoft.Windows.Server.OperatingSystem" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
         <Category>Discovery</Category>
         <DiscoveryTypes>
-          <DiscoveryClass TypeID="Pure.FlashArrays.Arrays" />
+          <DiscoveryClass TypeID="Pure.FlashArrays.Arrays">
+            <Property TypeID="Pure.FlashArrays.Arrays" PropertyID="Version" />
+            <Property TypeID="Pure.FlashArrays.Arrays" PropertyID="ArrayName" />
+            <Property TypeID="Pure.FlashArrays.Arrays" PropertyID="UserName" />
+            <Property TypeID="Pure.FlashArrays.Arrays" PropertyID="ApiVersion" />
+            <Property TypeID="Pure.FlashArrays.Arrays" PropertyID="ApiToken" />
+            <Property TypeID="Pure.FlashArrays.Arrays" PropertyID="Role" />
+          </DiscoveryClass>
         </DiscoveryTypes>
-        <DataSource ID="DS.Arrays" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
-          <IntervalSeconds>300</IntervalSeconds>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>14400</IntervalSeconds>
           <SyncTime />
           <ScriptName>DiscoverArrays.ps1</ScriptName>
           <ScriptBody><![CDATA[param($sourceId, $managedEntityId, $computerName, $arrayName, $userName, $password)
@@ -366,8 +419,6 @@ if ($computerName -eq "scom-xin.xin.com") {
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ApiVersion$", $apiVersion)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ApiToken$", $apiToken)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Role$", $role)
-
-    $api.LogScriptEvent("DiscoverArrays.ps1", 2223, 0, ($attributes.version + $attributes.array_name + $array.UserName + $array.ApiVersion + $apiToken + $array.Role)) 
 
     $api.LogScriptEvent("DiscoverArrays.ps1", 2224, 0, "Finish Discovery $apiVersion")
     $discoveryData.AddInstance($volumesInstance)
@@ -404,7 +455,7 @@ $discoveryData
               <Value>pureuser</Value>
             </Parameter>
           </Parameters>
-          <TimeoutSeconds>300</TimeoutSeconds>
+          <TimeoutSeconds>120</TimeoutSeconds>
         </DataSource>
       </Discovery>
     </Discoveries>
@@ -613,7 +664,7 @@ $discoveryData
         </DisplayString>
         <DisplayString ElementID="PureStorage.FlashArrays.Pure.FlashArrays.Discovery.Arrays">
           <Name>Discover Arrays</Name>
-          <Description>Discover Arrays</Description>
+          <Description>Description for the new discovery.</Description>
         </DisplayString>
       </DisplayStrings>
       <KnowledgeArticles></KnowledgeArticles>

@@ -29,8 +29,6 @@ if ($computerName -eq "scom-xin.xin.com") {
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/ApiToken$", $apiToken)
     $arraysInstance.AddProperty("$MPElement[Name='Pure.FlashArrays.Arrays']/Role$", $role)
 
-    $api.LogScriptEvent("DiscoverArrays.ps1", 2223, 0, ($attributes.version + $attributes.array_name + $array.UserName + $array.ApiVersion + $apiToken + $array.Role)) 
-
     $api.LogScriptEvent("DiscoverArrays.ps1", 2224, 0, "Finish Discovery $apiVersion")
     $discoveryData.AddInstance($volumesInstance)
     Disconnect-PfaArray -Array $array
